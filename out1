@@ -1,0 +1,43 @@
+------------------------------------------------------------------------
+python regoverviews.py -h
+usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
+
+positional arguments:
+  host
+  port
+
+options:
+  -h, --help  show this help message and exit
+  -d dept     show only those classes whose department contains dept
+  -n num      show only those classes whose course number contains num
+  -a area     show only those classes whose distrib area contains area
+  -t title    show only those classes whose course title contains title
+Exit status = 0
+------------------------------------------------------------------------
+python regoverviews.py localhost 5555 -d COS
+result: <_io.TextIOWrapper name=3 mode='r' encoding='utf-8'>
+Traceback (most recent call last):
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/regoverviews.py", line 62, in <module>
+    main()
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/regoverviews.py", line 49, in main
+    result_data = result.readline()
+                  ^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exit status = 0
+------------------------------------------------------------------------
+python regoverviews.py localhost 5555 -d COS -a qr -n 2 -t intro
+result: <_io.TextIOWrapper name=3 mode='r' encoding='utf-8'>
+Traceback (most recent call last):
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/regoverviews.py", line 62, in <module>
+    main()
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/regoverviews.py", line 49, in main
+    result_data = result.readline()
+                  ^^^^^^^^^^^^^^^^^
+  File "/opt/anaconda3/lib/python3.12/socket.py", line 720, in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exit status = 0

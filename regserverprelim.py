@@ -156,9 +156,12 @@ def details_format(class_info, course_info, crosslistings_info, res4):
 
 def handle_client(sock):
     call = sock.makefile(mode="r", encoding='utf-8')
-    call.recv()
+    print(f"call: {call}")
+    call_data = call.readline()
+    print("GOT HERE!")
 
-    actual_call = json.load(call)
+    actual_call = json.loads(call_data)
+    print(f"actual call: {actual_call}")
     if actual_call[0] == 'get_overviews':
         args = {
             "dept": None,
@@ -175,8 +178,12 @@ def handle_client(sock):
                                            course_number=args["coursenum"], 
                                            distribution_area=args["area"], 
                                            class_title=args["title"])
+        flo = sock.makefile(mode="w", encoding="utf-8")
+        # Potentially use inflo/outflo here
+        flo.write(json.dumps(payload) + "\n")
+        flo.flush()
 
-        return json.dumps(payload)
+        # return json.dumps(payload)
 
     elif actual_call[0] == 'get_details':
         class_id = actual_call[1] # the second argument is supposed to the class id
@@ -192,12 +199,18 @@ def handle_client(sock):
 
         
         resp = details_format(classinfo, infosets[1], infosets[2], infosets[3])
- #
-        return json.dumps((True, resp)) # Insert True before the return
-    else:
-        print(f"vat the fak") # Venkaaaaaaaaaaaaaaaaaat
 
+        flo = sock.makefile(mode="w", encoding="utf-8")
+        # Potentially use inflo/outflo here
+        flo.write("hello")
+        flo.flush()
+        # return json.dumps((True, resp)) # Insert True before the return
 
+def handle_client_1(sock):
+    datetime = time.asctime(time.localtime())
+    flo = sock.makefile(mode='w', encoding='ascii')
+    flo.write(datetime + '\n')
+    flo.flush()
 #-----------------------------------------------------------------------
 
 def main():
