@@ -50,7 +50,7 @@ def main():
         payload[1]["dept"] = payload[1]["dept"].replace('%', r'\%') #Replace %'s
     
     if payload[1]["coursenum"] is None:
-        payload[1]["coursenum"] = ''
+        payload[1]["coursenum"] = '' # Handle ignore on server side
     else:
         payload[1]["coursenum"] = payload[1]["coursenum"].replace('_', r'\_')
         # Replace underscores
