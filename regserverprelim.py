@@ -9,7 +9,6 @@ import contextlib
 import textwrap
 import sys
 
-
 parser = argparse.ArgumentParser()
 
 DATABASE_URL = r"file:reg.sqlite?mode=ro"
@@ -156,7 +155,7 @@ def details_format(class_info, course_info, crosslistings_info, res4):
     }
 
 def handle_client(sock):
-    call = sock.makefile(mode="r", encoding='UTF-8')
+    call = sock.makefile(mode="r", encoding='utf-8')
     call.recv()
 
     actual_call = json.load(call)
@@ -177,33 +176,28 @@ def handle_client(sock):
                                            distribution_area=args["area"], 
                                            class_title=args["title"])
 
-        return json.dump(payload)
+        return json.dumps(payload)
 
     elif actual_call[0] == 'get_details':
         class_id = actual_call[1] # the second argument is supposed to the class id
         classinfo = get_class_info(class_id)
 
         if not classinfo[0]:
-            return json.dump(classinfo) # return False with the exception
-        
+            return json.dumps(classinfo) # return False with the exception
 
         infosets = get_course_info(classinfo[1])
 
         if not infosets[0]:
-            return json.dump(infosets) # Return False with the exception
+            return json.dumps(infosets) # Return False with the exception
 
         
         resp = details_format(classinfo, infosets[1], infosets[2], infosets[3])
  #
-        return json.dump((True. resp)) # Insert True before the return
+        return json.dumps((True, resp)) # Insert True before the return
     else:
         print(f"vat the fak") # Venkaaaaaaaaaaaaaaaaaat
 
-def handle_client_1(sock):
-    datetime = time.asctime(time.localtime())
-    flo = sock.makefile(mode='w', encoding='ascii')
-    flo.write(datetime + '\n')
-    flo.flush()
+
 #-----------------------------------------------------------------------
 
 def main():
@@ -231,13 +225,7 @@ def main():
                     print('Opened socket')
                     print('Server IP addr and port:', sock.getsockname())
                     print('Client IP addr and port:', client_addr)
-                    if not TESTING:
-                        handle_client(sock) 
-                    else:
-                        datetime = "yo"
-                        flo = sock.makefile(mode='w', encoding='ascii')
-                        flo.write(datetime + '\n')
-                        flo.flush()
+                    handle_client(sock)
             except Exception as ex:
                 print(ex, file=sys.stderr)
 

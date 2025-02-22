@@ -1,6 +1,7 @@
 import argparse
 import socket
-
+import sys
+import json
 
 parser = argparse.ArgumentParser()
 
@@ -24,6 +25,34 @@ def main():
     parser.add_argument(dest="port", metavar="port",help="",
                         type=int)
     args = parser.parse_args()
+
+    payload = ['get_overviews', {
+        "dept": args.dept,
+        "coursenum": args.num,
+        "area": args.area,
+        'title': args.title
+    }]
+
+    try:
+        host = sys.argv[1]
+        port = int(sys.argv[2])
+
+        with socket.socket() as sock:
+            sock.connect((host, port))
+            flo = sock.makefile(mode='w', encoding='utf-8')
+            flo.write(json.dumps(payload))
+            flo.flush()
+
+            result = sock.makefile(mode='r', encoding='utf-8')
+            result_data = result.read()
+
+            print(result_data)
+
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        sys.exit(1)
+    finally:
+        sock.close()
 
 
 
