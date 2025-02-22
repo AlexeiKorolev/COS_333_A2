@@ -199,6 +199,11 @@ def handle_client(sock):
     else:
         print(f"vat the fak") # Venkaaaaaaaaaaaaaaaaaat
 
+def handle_client_1(sock):
+    datetime = time.asctime(time.localtime())
+    flo = sock.makefile(mode='w', encoding='ascii')
+    flo.write(datetime + '\n')
+    flo.flush()
 #-----------------------------------------------------------------------
 
 def main():
@@ -229,7 +234,7 @@ def main():
                     if not TESTING:
                         handle_client(sock) 
                     else:
-                        datetime = time.asctime(time.localtime())
+                        datetime = "yo"
                         flo = sock.makefile(mode='w', encoding='ascii')
                         flo.write(datetime + '\n')
                         flo.flush()

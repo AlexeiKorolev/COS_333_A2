@@ -14,6 +14,7 @@ import socket
 #-----------------------------------------------------------------------
 
 def main():
+
     if len(sys.argv) != 3:
         print('Usage: python %s host port' % sys.argv[0])
         sys.exit(1)
