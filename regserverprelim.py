@@ -63,10 +63,18 @@ def return_overviews_query(department='%', course_number='%',
                 #Prevent SQL injections
                 table = cursor.fetchall() # fetch query results
 
+                order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
+                print("creating dictionized table")
+
+                # Converts each row in the table to a key: value dictionary
+                dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
+
+                print(f"dictionized table: {dictionized_table}")
                 # format_response(table)
-                return True, table
+                return True, dictionized_table
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
+
 
 def get_class_info(classid):
     try:
