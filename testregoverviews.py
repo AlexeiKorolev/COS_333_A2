@@ -61,8 +61,38 @@ def main():
 
     prefix = host + ' ' + str(port) + ' '
 
-    exec_command(program, prefix + '-d COS')
-    exec_command(program, prefix + '-d COS -a qr -n 2 -t intro')
+    def execute_many_statements():
+        #Testing commands given in assignment
+        exec_command(program, prefix + '')
+        exec_command(program, prefix + '-d COS')
+        exec_command(program, prefix + '-n 333')
+        exec_command(program, prefix + '-n b')
+        exec_command(program, prefix + '-a Qr')
+        exec_command(program, prefix + '-t intro')
+        exec_command(program, prefix + '-t science')
+        exec_command(program, prefix + '-t C_S')
+        exec_command(program, prefix + '-t c%S')
+        exec_command(program, prefix + '-d cos -n 3')
+        exec_command(program, prefix + '-d COS -a qr -n 2 -t intro')
+        exec_command(program, prefix + '-t "Independent Study"')
+        exec_command(program, prefix + '-t "Independent Study "')
+        exec_command(program, prefix + '-t "Independent Study  "')
+        exec_command(program, prefix + '-t " Independent Study"')
+        exec_command(program, prefix + '-t "  Independent Study"')
+        exec_command(program, prefix + '-t=-c')
+
+        #Test erroneous command line arguments
+        exec_command(program, prefix + 'a qr')
+        exec_command(program, prefix + '-A qr')
+        exec_command(program, prefix + '"-a " qr')
+        exec_command(program, prefix + '-a qr st')
+        exec_command(program, prefix + '-a')
+        exec_command(program, prefix + '-a qr -d')
+        exec_command(program, prefix + '-a -d cos')
+        exec_command(program, prefix + '-x')
+
+
+    execute_many_statements()
 
     # Add more tests here.
 
