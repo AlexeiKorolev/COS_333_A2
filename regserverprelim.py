@@ -17,28 +17,30 @@ TESTING = True
 
 def return_overviews_query(department='%', course_number='%',
                  distribution_area='%', class_title='%'):
-    if department is None:
+    if department == '':
         department = '%'
     else:
+        pass
         department = department.replace('_', r'\_') #Replace underscores
         department = department.replace('%', r'\%') #Replace %'s
 
-    if course_number is None:
+    if course_number == '':
         course_number = '%'
     else:
+        pass
         course_number = course_number.replace('_', r'\_')
-        # Replace underscores
         course_number = course_number.replace('%', r'\%')
-        # Replace %'s
 
-    if distribution_area is None:
+    if distribution_area == '':
         distribution_area = '%' #To allow SQL to ignore
     else:
+        pass
         distribution_area = distribution_area.replace('_', r'\_')
         distribution_area = distribution_area.replace('%', r'\%')
-    if class_title is None:
+    if class_title == '':
         class_title = '%' #To allow SQL to ignore
     else:
+        pass
         class_title = class_title.replace('_', r'\_')
         class_title = class_title.replace('%', r'\%')
 
@@ -62,15 +64,15 @@ def return_overviews_query(department='%', course_number='%',
                                         '%' + class_title + '%']) 
                 #Prevent SQL injections
                 table = cursor.fetchall() # fetch query results
-
                 order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
+
                 print("creating dictionized table")
 
                 # Converts each row in the table to a key: value dictionary
                 dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
 
-                print(f"dictionized table: {dictionized_table}")
-                # format_response(table)
+                print(f"Returning a table with {len(dictionized_table)} elements")
+
                 return True, dictionized_table
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
