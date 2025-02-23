@@ -50,28 +50,14 @@ def main():
 
     if payload[1]["dept"] is None:
         payload[1]["dept"] = ''
-    # else:
-    #     payload[1]["dept"] = payload[1]["dept"].replace('_', r'\_') #Replace underscores
-    #     payload[1]["dept"] = payload[1]["dept"].replace('%', r'\%') #Replace %'s
     
     if payload[1]["coursenum"] is None:
         payload[1]["coursenum"] = '' # Handle ignore on server side
-    # else:
-    #     payload[1]["coursenum"] = payload[1]["coursenum"].replace('_', r'\_')
-    #     # Replace underscores
-    #     payload[1]["coursenum"] = payload[1]["coursenum"].replace('%', r'\%')
-        # Replace %'s
     
     if payload[1]["area"] is None:
         payload[1]["area"] = '' #To allow SQL to ignore
-    # else:
-    #     payload[1]["area"] = payload[1]["area"].replace('_', r'\_')
-    #     payload[1]["area"] = payload[1]["area"].replace('%', r'\%')
     if payload[1]["title"] is None:
         payload[1]["title"] = '' #To allow SQL to ignore
-    # else:
-    #     payload[1]["title"] = payload[1]["title"].replace('_', r'\_')
-    #     payload[1]["title"] = payload[1]["title"].replace('%', r'\%')
 
     try:
         host = sys.argv[1]
