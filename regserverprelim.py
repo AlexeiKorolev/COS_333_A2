@@ -11,7 +11,7 @@ import sys
 
 parser = argparse.ArgumentParser()
 
-DATABASE_URL = r"file:reg.sqlite?mode=ro"
+DATABASE_URL = r"file:COS_333_A2\reg.sqlite?mode=ro"
 TESTING = True
 #-----------------------------------------------------------------------
 

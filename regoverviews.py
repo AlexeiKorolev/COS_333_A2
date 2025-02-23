@@ -11,6 +11,7 @@ def format_reg_response(resp: list):
     print("ClsId Dept CrsNum Area Title")
     print("----- ---- ------ ---- -----")
     for row in resp:
+        row = tuple(row) # Make sure the row is a tuple for formatting
         row = '%5s %4s %6s %4s %s' % row
 
         wrapped_text = textwrap.fill(row, width=72,
@@ -43,30 +44,30 @@ def main():
         'title': args.title
     }]
 
-    if payload[1]["dept"] is None:
-        pass
-    else:
-        payload[1]["dept"] = payload[1]["dept"].replace('_', r'\_') #Replace underscores
-        payload[1]["dept"] = payload[1]["dept"].replace('%', r'\%') #Replace %'s
+    # if payload[1]["dept"] is None:
+    #     pass
+    # else:
+    #     payload[1]["dept"] = payload[1]["dept"].replace('_', r'\_') #Replace underscores
+    #     payload[1]["dept"] = payload[1]["dept"].replace('%', r'\%') #Replace %'s
     
-    if payload[1]["coursenum"] is None:
-        payload[1]["coursenum"] = '' # Handle ignore on server side
-    else:
-        payload[1]["coursenum"] = payload[1]["coursenum"].replace('_', r'\_')
-        # Replace underscores
-        payload[1]["coursenum"] = payload[1]["coursenum"].replace('%', r'\%')
-        # Replace %'s
+    # if payload[1]["coursenum"] is None:
+    #     payload[1]["coursenum"] = '' # Handle ignore on server side
+    # else:
+    #     payload[1]["coursenum"] = payload[1]["coursenum"].replace('_', r'\_')
+    #     # Replace underscores
+    #     payload[1]["coursenum"] = payload[1]["coursenum"].replace('%', r'\%')
+    #     # Replace %'s
     
-    if payload[1]["area"] is None:
-        payload[1]["area"] = '' #To allow SQL to ignore
-    else:
-        payload[1]["area"] = payload[1]["area"].replace('_', r'\_')
-        payload[1]["area"] = payload[1]["area"].replace('%', r'\%')
-    if payload[1]["title"] is None:
-        payload[1]["title"] = '' #To allow SQL to ignore
-    else:
-        payload[1]["title"] = payload[1]["title"].replace('_', r'\_')
-        payload[1]["title"] = payload[1]["title"].replace('%', r'\%')
+    # if payload[1]["area"] is None:
+    #     payload[1]["area"] = '' #To allow SQL to ignore
+    # else:
+    #     payload[1]["area"] = payload[1]["area"].replace('_', r'\_')
+    #     payload[1]["area"] = payload[1]["area"].replace('%', r'\%')
+    # if payload[1]["title"] is None:
+    #     payload[1]["title"] = '' #To allow SQL to ignore
+    # else:
+    #     payload[1]["title"] = payload[1]["title"].replace('_', r'\_')
+    #     payload[1]["title"] = payload[1]["title"].replace('%', r'\%')
 
     try:
         host = sys.argv[1]
@@ -87,6 +88,7 @@ def main():
             print(f"result_text: {result_text}")
             print(f"result_text[1]: {result_text[1]}")
             if result_text[0]:
+                format_reg_response(result_text[1])
                 pass # need to format responses
 
     except Exception as ex:
