@@ -145,24 +145,27 @@ def get_course_info(classid):
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
 
+# ['classid', 'courseid', 'days', 'starttime', 'endtime', 'bldg', 'roomnum', 'deptcoursenums': {'dept': ... , 'coursenum': ...}, 'area', 'title', 'descrip', 'prereqs', 'profnames': [...]]
+
 # Formats the isolated responses into a data dictionary
 def details_format(class_info, course_info, crosslistings_info, res4):
     return {
+        "classid": class_info[6],
         "courseid": class_info[0],
         "days": class_info[1],
         "starttime": class_info[2],
         "endtime": class_info[3],
-        "building": class_info[4],
+        "bldg": class_info[4],
         "roomnum": class_info[5],
-        "classid": class_info[6],
-        "area": course_info[0][0],
-        "title": course_info[0][1],
-        "description": course_info[0][2],
-        "prerequisites": course_info[0][3],
-        "crosslistings": [{"dept": dept, "coursenum": coursenum} 
+        "deptcoursenums": [{"dept": dept, "coursenum": coursenum} 
                           for dept, coursenum in crosslistings_info],
-        "profs": [profname for profname, in res4]
+        "area": course_info[0][0],
+        "title": course_info[0][1],  
+        "description": course_info[0][2],  
+        "prereqs": course_info[0][3],  
+        "profnames": [profname for profname, in res4]
     }
+
 
 def handle_client(sock):
     call = sock.makefile(mode="r", encoding='utf-8')
@@ -196,25 +199,30 @@ def handle_client(sock):
         # return json.dumps(payload)
 
     elif actual_call[0] == 'get_details':
-        class_id = actual_call[1] # the second argument is supposed to the class id
+        print(actual_call, type(actual_call[1]))
+        class_id = int(actual_call[1]) # the second argument is supposed to the class id
+        print("got past classid")
         classinfo = get_class_info(class_id)
 
         if not classinfo[0]:
             return json.dumps(classinfo) # return False with the exception
 
-        infosets = get_course_info(classinfo[1])
+        print(classinfo)
+        print(classinfo[1][0])
+        # Return just the course number, which is [True, (coursenum, ....)].
+        infosets = get_course_info(classinfo[1][0])
 
         if not infosets[0]:
             return json.dumps(infosets) # Return False with the exception
 
-        
-        resp = details_format(classinfo, infosets[1], infosets[2], infosets[3])
+        # CHANGE THIS LATER
+        sub_infosets = infosets[1][0]
+        print(f"sub info sets: {sub_infosets}")
+        payload = details_format(classinfo[1], sub_infosets[1], sub_infosets[2], sub_infosets[3])
 
         flo = sock.makefile(mode="w", encoding="utf-8")
-        # Potentially use inflo/outflo here
-        flo.write("hello")
+        flo.write(json.dumps(payload) + "\n")
         flo.flush()
-        # return json.dumps((True, resp)) # Insert True before the return
 
 def handle_client_1(sock):
     datetime = time.asctime(time.localtime())
