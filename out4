@@ -1,0 +1,84 @@
+------------------------------------------------------------------------
+python regdetails.py -h
+usage: regdetails.py [-h] host port classid
+
+Registrar application: show details about a class
+
+positional arguments:
+  host        the computer on which the server is running
+  port        the port at which the server is listening
+  classid     the id of the class whose details should be shown
+
+options:
+  -h, --help  show this help message and exit
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py 8321
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 7842
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 8094
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 8285
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 8508
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: host, port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 9034
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 7838
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 7839
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 7840
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py 7841
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: port, classid
+Exit status = 2
