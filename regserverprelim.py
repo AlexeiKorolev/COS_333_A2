@@ -94,7 +94,7 @@ def get_class_info(classid):
 
                 # Ensure there was a response
                 if len(table) == 0:
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid {classid} exists"
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
@@ -117,7 +117,7 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "regdetails.py: no class with " +f"classid {classid} exists"
+                    return False, "no class with " +f"classid {classid} exists"
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
@@ -129,7 +129,7 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid {classid} exists"
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs

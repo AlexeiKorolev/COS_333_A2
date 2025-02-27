@@ -17,16 +17,15 @@ TESTING = True
 class ChildThread (threading.Thread):
     def __init__(self, sock):
         threading.Thread.__init__(self)
+        print("Spawned child thread")
         self._sock = sock
 
     def run(self):
         call = self._sock.makefile(mode="r", encoding='utf-8')
-        print(f"call: {call}")
         call_data = call.readline()
-        print("GOT HERE!")
 
         actual_call = json.loads(call_data)
-        print(f"actual call: {actual_call}")
+        print(f'Received request: {actual_call}')
         if actual_call[0] == 'get_overviews':
             args = {
                 "dept": None,
@@ -51,35 +50,33 @@ class ChildThread (threading.Thread):
             # return json.dumps(payload)
 
         elif actual_call[0] == 'get_details':
-            print(actual_call, type(actual_call[1]))
             class_id = int(actual_call[1]) # the second argument is supposed to the class id
-            print("got past classid")
             classinfo = get_class_info(class_id)
 
             if not classinfo[0]:
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
                 flo.write(json.dumps(classinfo) + "\n")
                 flo.flush()
+            else:
 
-            # Return just the course number, which is [True, (coursenum, ....)].
-            infosets = get_course_info(classinfo[1][0])
+                # Return just the course number, which is [True, (coursenum, ....)].
+                infosets = get_course_info(classinfo[1][0])
 
 
 
-            if not infosets[0]:
-                flo = self._sock.makefile(mode="w", encoding="utf-8")
-                flo.write(json.dumps(infosets) + "\n")
-                flo.flush()
+                if not infosets[0]:
+                    flo = self._sock.makefile(mode="w", encoding="utf-8")
+                    flo.write(json.dumps(infosets) + "\n")
+                    flo.flush()
+                
+                else:
 
-            # CHANGE THIS LATER
-            print(f"infosets here: {infosets[0]}")
-            payload = [True, details_format(classinfo[1], infosets[1], infosets[2], infosets[3])]
+                    # CHANGE THIS LATER
+                    payload = [True, details_format(classinfo[1], infosets[1], infosets[2], infosets[3])]
 
-            print(f"payload: {payload}")
-
-            flo = self._sock.makefile(mode="w", encoding="utf-8")
-            flo.write(json.dumps(payload) + "\n")
-            flo.flush()
+                    flo = self._sock.makefile(mode="w", encoding="utf-8")
+                    flo.write(json.dumps(payload) + "\n")
+                    flo.flush()
         print("Closed socket in child thread")
         print("Exiting child thread")
 #-----------------------------------------------------------------------
@@ -135,12 +132,8 @@ def return_overviews_query(department='%', course_number='%',
                 table = cursor.fetchall() # fetch query results
                 order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
 
-                print("creating dictionized table")
-
                 # Converts each row in the table to a key: value dictionary
                 dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
-
-                print(f"Returning a table with {len(dictionized_table)} elements")
 
                 return True, dictionized_table
     except Exception as ex:
@@ -163,7 +156,7 @@ def get_class_info(classid):
 
                 # Ensure there was a response
                 if len(table) == 0:
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid {classid} exists"
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
@@ -186,19 +179,17 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "regdetails.py: no class with " +f"classid {classid} exists"
+                    return False, "no class with " +f"classid {classid} exists"
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
                 WHERE c.courseid = ? ORDER BY dept ASC, coursenum ASC"""
                 cursor.execute(query, [classid])
                 crosslistings_info = cursor.fetchall()
-                print(f"crosslistings_info: {crosslistings_info}")
-                print(f"classid: {classid}")
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid {classid} exists"
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs
@@ -206,7 +197,6 @@ def get_course_info(classid):
                         courseid = ? ORDER BY profname ASC"""
                 cursor.execute(query, [classid])
                 prof_info = cursor.fetchall()
-                print(f"prof_info: {prof_info}")
 
                 return True, course_info, crosslistings_info, prof_info
 
@@ -217,10 +207,7 @@ def get_course_info(classid):
 
 # Formats the isolated responses into a data dictionary
 def details_format(class_info, course_info, crosslistings_info, res4):
-    print(f"courseinfo: {course_info}")
-    print(f"class_info: {class_info}")
-    print(f"res4: {res4}")
-    print(f"crosslistings_info: {crosslistings_info}")
+
     return {
         "classid": class_info[6],
         "courseid": class_info[0],
