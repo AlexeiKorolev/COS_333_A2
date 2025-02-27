@@ -9,11 +9,25 @@ import contextlib
 import textwrap
 import sys
 import threading
+import time
+import dotenv 
+
+dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser()
 
-DATABASE_URL = r"file:reg.sqlite?mode=ro"
+DATABASE_URL = r"file:COS_333_A2\reg.sqlite?mode=ro"
 TESTING = True
+
+CDELAY = int(os.environ.get("CDELAY", "0"))
+IODELAY = int(os.environ.get("IODELAY", "0"))
+       
+def consume_cpu_time(delay):
+    initial_thread_time = time.thread_time()
+    while (time.thread_time() - initial_thread_time) < delay:
+        pass
+
+
 class ChildThread (threading.Thread):
     def __init__(self, sock):
         threading.Thread.__init__(self)
@@ -83,6 +97,8 @@ class ChildThread (threading.Thread):
 
 def return_overviews_query(department='%', course_number='%',
                  distribution_area='%', class_title='%'):
+    time.sleep(IODELAY)
+    consume_cpu_time(CDELAY)
     if department == '':
         department = '%'
     else:
@@ -111,6 +127,7 @@ def return_overviews_query(department='%', course_number='%',
         class_title = class_title.replace('%', r'\%')
 
     try:
+        
         with sql.connect(DATABASE_URL,
             isolation_level=None, uri=True) as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -141,8 +158,12 @@ def return_overviews_query(department='%', course_number='%',
 
 
 def get_class_info(classid):
+    time.sleep(IODELAY)
+    consume_cpu_time(CDELAY)
     try:
         # Connect to database
+        time.sleep(IODELAY)
+        consume_cpu_time(CDELAY)
         with sql.connect(DATABASE_URL,
                          isolation_level=None, uri=True) as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -165,8 +186,11 @@ def get_class_info(classid):
 
 def get_course_info(classid):
     classid = int(classid)
+    time.sleep(IODELAY)
+    consume_cpu_time(CDELAY)
     try:
         # Connect to the database
+
         with sql.connect(DATABASE_URL, isolation_level=None,
                          uri=True) as connection:
             with contextlib.closing(connection.cursor()) as cursor:
