@@ -8,11 +8,78 @@ import sqlite3 as sql
 import contextlib
 import textwrap
 import sys
+import threading
 
 parser = argparse.ArgumentParser()
 
 DATABASE_URL = r"file:reg.sqlite?mode=ro"
 TESTING = True
+class ChildThread (threading.Thread):
+    def __init__(self, sock):
+        threading.Thread.__init__(self)
+        self._sock = sock
+
+    def run(self):
+        print("Spawned child thread")
+        with self._sock:
+            call = self._sock.makefile(mode="r", encoding='utf-8')
+            print(f"call: {call}")
+            call_data = call.readline()
+            print("GOT HERE!")
+
+            actual_call = json.loads(call_data)
+            print(f"actual call: {actual_call}")
+            if actual_call[0] == 'get_overviews':
+                
+                args = {
+                    "dept": None,
+                    "coursenum": None,
+                    "area": None,
+                    'title': None
+                }
+                given_args = actual_call[1]
+
+                for arg, val in given_args.items():
+                    args[arg] = val 
+                
+                payload =  return_overviews_query(department=args["dept"], 
+                                                course_number=args["coursenum"], 
+                                                distribution_area=args["area"], 
+                                                class_title=args["title"])
+                flo = self._sock.makefile(mode="w", encoding="utf-8")
+                # Potentially use inflo/outflo here
+                flo.write(json.dumps(payload) + "\n")
+                flo.flush()
+
+                # return json.dumps(payload)
+
+            elif actual_call[0] == 'get_details':
+                print(actual_call, type(actual_call[1]))
+                class_id = int(actual_call[1]) # the second argument is supposed to the class id
+                print("got past classid")
+                classinfo = get_class_info(class_id)
+
+                if not classinfo[0]:
+                    return json.dumps(classinfo) # return False with the exception
+
+                print(classinfo)
+                print(classinfo[1][0])
+                # Return just the course number, which is [True, (coursenum, ....)].
+                infosets = get_course_info(classinfo[1][0])
+
+                if not infosets[0]:
+                    return json.dumps(infosets) # Return False with the exception
+
+                # CHANGE THIS LATER
+                sub_infosets = infosets[1][0]
+                print(f"sub info sets: {sub_infosets}")
+                payload = details_format(classinfo[1], sub_infosets[1], sub_infosets[2], sub_infosets[3])
+
+                flo = self._sock.makefile(mode="w", encoding="utf-8")
+                flo.write(json.dumps(payload) + "\n")
+                flo.flush()
+        print("Closed socket in child thread")
+        print("Exiting child thread")
 #-----------------------------------------------------------------------
 
 def return_overviews_query(department='%', course_number='%',
@@ -167,68 +234,7 @@ def details_format(class_info, course_info, crosslistings_info, res4):
     }
 
 
-def handle_client(sock):
-    call = sock.makefile(mode="r", encoding='utf-8')
-    print(f"call: {call}")
-    call_data = call.readline()
-    print("GOT HERE!")
 
-    actual_call = json.loads(call_data)
-    print(f"actual call: {actual_call}")
-    if actual_call[0] == 'get_overviews':
-        args = {
-            "dept": None,
-            "coursenum": None,
-            "area": None,
-            'title': None
-        }
-        given_args = actual_call[1]
-
-        for arg, val in given_args.items():
-            args[arg] = val 
-        
-        payload =  return_overviews_query(department=args["dept"], 
-                                           course_number=args["coursenum"], 
-                                           distribution_area=args["area"], 
-                                           class_title=args["title"])
-        flo = sock.makefile(mode="w", encoding="utf-8")
-        # Potentially use inflo/outflo here
-        flo.write(json.dumps(payload) + "\n")
-        flo.flush()
-
-        # return json.dumps(payload)
-
-    elif actual_call[0] == 'get_details':
-        print(actual_call, type(actual_call[1]))
-        class_id = int(actual_call[1]) # the second argument is supposed to the class id
-        print("got past classid")
-        classinfo = get_class_info(class_id)
-
-        if not classinfo[0]:
-            return json.dumps(classinfo) # return False with the exception
-
-        print(classinfo)
-        print(classinfo[1][0])
-        # Return just the course number, which is [True, (coursenum, ....)].
-        infosets = get_course_info(classinfo[1][0])
-
-        if not infosets[0]:
-            return json.dumps(infosets) # Return False with the exception
-
-        # CHANGE THIS LATER
-        sub_infosets = infosets[1][0]
-        print(f"sub info sets: {sub_infosets}")
-        payload = details_format(classinfo[1], sub_infosets[1], sub_infosets[2], sub_infosets[3])
-
-        flo = sock.makefile(mode="w", encoding="utf-8")
-        flo.write(json.dumps(payload) + "\n")
-        flo.flush()
-
-def handle_client_1(sock):
-    datetime = time.asctime(time.localtime())
-    flo = sock.makefile(mode='w', encoding='ascii')
-    flo.write(datetime + '\n')
-    flo.flush()
 #-----------------------------------------------------------------------
 
 def main():
@@ -256,7 +262,9 @@ def main():
                     print('Opened socket')
                     print('Server IP addr and port:', sock.getsockname())
                     print('Client IP addr and port:', client_addr)
-                    handle_client(sock)
+                    child_thread = ChildThread(sock)
+                    child_thread.start()
+                    child_thread.join()
             except Exception as ex:
                 print(ex, file=sys.stderr)
 
