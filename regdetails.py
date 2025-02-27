@@ -97,6 +97,9 @@ def main():
             if result_text[0]:
                 dict_results = result_text[1]
                 format_reg_response(dict_results)
+            else:
+                print(f"{sys.argv[0]}: {result_text[1]}")
+                sys.exit(1)
     except Exception as ex:
         print(ex, file=sys.stderr)
         sys.exit(1)

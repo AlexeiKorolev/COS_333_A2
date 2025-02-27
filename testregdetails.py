@@ -57,28 +57,28 @@ def main():
 
     program, host, port = parse_args()
 
-    exec_command(program, '-h')
-
     prefix = host + ' ' + str(port) + ' '
 
+    # Add more tests here.
+
     def test_commands():
-        exec_command(program, '8321')
-        exec_command(program, '9032')
-        exec_command(program, '7842')
-        exec_command(program, '8094')
-        exec_command(program, '8285')
-        exec_command(program, '8508')
+        exec_command(program, prefix + '8321')
+        exec_command(program, prefix + '9032')
+        exec_command(program, prefix + '7842')
+        exec_command(program, prefix + '8094')
+        exec_command(program, prefix + '8285')
+        exec_command(program, prefix + '8508')
 
         #Testing erroneous command line arguments
-        exec_command(program, '')
-        exec_command(program, '8321 9032')
-        exec_command(program, 'abc123')
-        exec_command(program, '9034')
+        exec_command(program, prefix + '')
+        exec_command(program, prefix + '8321 9032')
+        exec_command(program, prefix + 'abc123')
+        exec_command(program, prefix + '9034')
 
-        exec_command(program, '7838')
-        exec_command(program, '7839')
-        exec_command(program, '7840')
-        exec_command(program, '7841')
+        exec_command(program, prefix + '7838')
+        exec_command(program, prefix + '7839')
+        exec_command(program, prefix + '7840')
+        exec_command(program, prefix + '7841')
 
     test_commands()
 

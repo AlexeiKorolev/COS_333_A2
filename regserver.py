@@ -23,12 +23,10 @@ class ChildThread (threading.Thread):
         print("Spawned child thread")
         with self._sock:
             call = self._sock.makefile(mode="r", encoding='utf-8')
-            print(f"call: {call}")
             call_data = call.readline()
-            print("GOT HERE!")
 
             actual_call = json.loads(call_data)
-            print(f"actual call: {actual_call}")
+            print(f"Received request: {actual_call}")
             if actual_call[0] == 'get_overviews':
                 
                 args = {
@@ -56,7 +54,6 @@ class ChildThread (threading.Thread):
             elif actual_call[0] == 'get_details':
                 print(actual_call, type(actual_call[1]))
                 class_id = int(actual_call[1]) # the second argument is supposed to the class id
-                print("got past classid")
                 classinfo = get_class_info(class_id)
 
                 if not classinfo[0]:
@@ -70,9 +67,7 @@ class ChildThread (threading.Thread):
                 if not infosets[0]:
                     return json.dumps(infosets) # Return False with the exception
 
-                # CHANGE THIS LATER
                 sub_infosets = infosets[1][0]
-                print(f"sub info sets: {sub_infosets}")
                 payload = details_format(classinfo[1], sub_infosets[1], sub_infosets[2], sub_infosets[3])
 
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
@@ -133,12 +128,10 @@ def return_overviews_query(department='%', course_number='%',
                 table = cursor.fetchall() # fetch query results
                 order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
 
-                print("creating dictionized table")
 
                 # Converts each row in the table to a key: value dictionary
                 dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
 
-                print(f"Returning a table with {len(dictionized_table)} elements")
 
                 return True, dictionized_table
     except Exception as ex:
@@ -257,11 +250,9 @@ def main():
         while True:
             try:
                 sock, client_addr = server_sock.accept()
+                print('Accepted connection, opened socket')
                 with sock:
-                    print('Accepted connection')
-                    print('Opened socket')
-                    print('Server IP addr and port:', sock.getsockname())
-                    print('Client IP addr and port:', client_addr)
+                    
                     child_thread = ChildThread(sock)
                     child_thread.start()
                     child_thread.join()
