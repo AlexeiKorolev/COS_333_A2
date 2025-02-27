@@ -4,14 +4,34 @@ Your name and your teammate's name.
 
 A paragraph describing your contribution, and another paragraph describing your teammate's contribution. Please be thorough; we're looking for two substantial paragraphs, not a sentence or two.
 
-- Alexei: I did squat.
-- Venkat:
+- Alexei: I worked on the regserverprelim and imported the code that we had used prior into the current project. I added sockets and our communication protocol to the regserverprelim. Wrote part of the testing suite. Added the delay functionality to regserver.
+- Venkat: Worked thoroughly on testing. Designed and debugged the printing format, and replicated the behavior of the reference files. Designed the corrupt databases for testing. Wrote regserver.py, and implemented and tested.
 
 A description of whatever help (if any) you received from other people while doing the assignment, as prescribed by the course Policies web page.
+
+- Being the determined coders we are, we consulted 0 people besides ourselves on this assignment.
+
 A description of the sources of information that you used while doing the assignment.
+
+- We used a lot of the lecture handouts and slides; they were very helpful.
+
 An indication of how much time you spent doing the assignment.
+
+- Approx. 8 hours
+
 Your assessment of the assignment: Did it help you to learn? What did it help you to learn? Do you have any suggestions for improvement? Etc.
+
+- This was an interesting assignment. The satisfaction of seeing two disconnected computers communicate between each other is rewarding/
+
 (Optionally) Any information that will help us to grade your work in the most favorable light. In particular you must describe all known bugs.
+
+- No known bugs; we did our best to replicate the behavior of the reference files.
+
 Your answers to the two questions noted previously.
 With respect to I/O and compute delays, in a high-volume environment under what circumstances is regserver.py better than regserverprelim.py?
+
+- regserver.py is better than regserverprelim.py when the iodelay is large, because with threading, the process can switch to a different thread while the iodelay is in progress.
+
 With respect to I/O and compute delays, in a high-volume environment under what circumstances is regserver.py not better than regserverprelim.py?
+
+- regserver.py performs similarly to regserverprelim.py when the compute delay is large, because switching threads does not solve the computation in the background; there's an equal amount of work to be done in both cases and switching threads won't help get it done.
