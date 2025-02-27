@@ -16,11 +16,17 @@ dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser()
 
-DATABASE_URL = r"file:COS_333_A2\reg.sqlite?mode=ro"
+DATABASE_URL = r"file:blah.sqlite?mode=ro"
 TESTING = True
 
-CDELAY = int(os.environ.get("CDELAY", "0"))
-IODELAY = int(os.environ.get("IODELAY", "0"))
+try:
+    CDELAY = int(os.environ.get("CDELAY", "0"))
+    IODELAY = int(os.environ.get("IODELAY", "0"))
+except:
+    CDELAY = 0 # Assume CDELAY and IODELAY = 0
+    IODELAY = 0
+
+
        
 def consume_cpu_time(delay):
     initial_thread_time = time.thread_time()
@@ -256,9 +262,18 @@ def main():
     if len(sys.argv) != 2:
         print('Usage: python %s port' % sys.argv[0])
         sys.exit(1)
+    try:
+        parser.add_argument(dest="port", metavar="port",help="the port at which the server is listening",
+                            type=int)
+        args = parser.parse_args()
+    except:
+        print(ex, file=sys.stderr)
+        sys.exit(2)
 
     try:
-        port = int(sys.argv[1])
+        
+
+        port = args.port
 
         server_sock = socket.socket()
         print('Opened server socket')
