@@ -16,7 +16,7 @@ options:
   -t title    show only those classes whose course title contains title
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 
+python regoverviews.py localhost 5555 
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8361  AAS    211   LA The American Dance Experience and Africanist
@@ -2336,7 +2336,7 @@ ClsId Dept CrsNum Area Title
 10264  WWS    598      Epidemiology
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -d COS
+python regoverviews.py localhost 5555 -d COS
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8291  COS    116   ST The Computational Universe
@@ -2382,7 +2382,7 @@ ClsId Dept CrsNum Area Title
                        Methods in Networking
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -n 333
+python regoverviews.py localhost 5555 -n 333
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8252  AAS    333   LA Studies in the Classical Tradition: From Athens
@@ -2400,7 +2400,7 @@ ClsId Dept CrsNum Area Title
 10179  WWS    333   SA Claims and Evidence in Policy Research
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -n b
+python regoverviews.py localhost 5555 -n b
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8057  ARC   262B   ST Structures and the Urban Environment
@@ -2442,7 +2442,7 @@ ClsId Dept CrsNum Area Title
                        Inequalities in Higher Education
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -a Qr
+python regoverviews.py localhost 5555 -a Qr
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  7894  APC    350   QR Introduction to Differential Equations
@@ -2542,7 +2542,7 @@ ClsId Dept CrsNum Area Title
 10178  WWS    332   QR Quantitative Analysis for Public Policy
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t intro
+python regoverviews.py localhost 5555 -t intro
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  7859  AFS    200   SA Introduction to African Studies
@@ -2740,7 +2740,7 @@ ClsId Dept CrsNum Area Title
 10038  VIS    262   LA Introductory Video and Film Production
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t science
+python regoverviews.py localhost 5555 -t science
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  7865  AFS    375   SA Science, Technology, and African Development
@@ -2858,19 +2858,19 @@ ClsId Dept CrsNum Area Title
 10242  WWS    584      The Use of Science in Public Policy
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t C_S
+python regoverviews.py localhost 5555 -t C_S
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8308  COS    217   QR Introduction to C_Science Programming Systems
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t c%S
+python regoverviews.py localhost 5555 -t c%S
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8321  COS    333      Advanced C%Science Programming Techniques
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -d cos -n 3
+python regoverviews.py localhost 5555 -d cos -n 3
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  9032  COS    233   ST An Integrated, Quantitative Introduction to the
@@ -2893,14 +2893,14 @@ ClsId Dept CrsNum Area Title
  8327  COS    435      Information Retrieval, Discovery, and Delivery
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -d COS -a qr -n 2 -t intro
+python regoverviews.py localhost 5555 -d COS -a qr -n 2 -t intro
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8308  COS    217   QR Introduction to C_Science Programming Systems
  9240  COS    342   QR Introduction to Graph Theory
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t "Independent Study"
+python regoverviews.py localhost 5555 -t "Independent Study"
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8070  CEE    376      Independent Study
@@ -2908,29 +2908,29 @@ ClsId Dept CrsNum Area Title
  8075  CEE    508      Independent Study II
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t "Independent Study "
+python regoverviews.py localhost 5555 -t "Independent Study "
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  8074  CEE    507      Independent Study I
  8075  CEE    508      Independent Study II
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t "Independent Study  "
+python regoverviews.py localhost 5555 -t "Independent Study  "
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t " Independent Study"
+python regoverviews.py localhost 5555 -t " Independent Study"
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t "  Independent Study"
+python regoverviews.py localhost 5555 -t "  Independent Study"
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -t=-c
+python regoverviews.py localhost 5555 -t=-c
 ClsId Dept CrsNum Area Title
 ----- ---- ------ ---- -----
  7939  ARC    489   LA Survey of Selected Works of Twentieth-Century
@@ -2965,42 +2965,42 @@ ClsId Dept CrsNum Area Title
                        Literature: Women and the Novel
 Exit status = 0
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 a qr
+python regoverviews.py localhost 5555 a qr
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: unrecognized arguments: a qr
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -A qr
+python regoverviews.py localhost 5555 -A qr
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: unrecognized arguments: -A qr
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 "-a " qr
+python regoverviews.py localhost 5555 "-a " qr
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: unrecognized arguments: qr
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -a qr st
+python regoverviews.py localhost 5555 -a qr st
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: unrecognized arguments: st
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -a
+python regoverviews.py localhost 5555 -a
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: argument -a: expected one argument
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -a qr -d
+python regoverviews.py localhost 5555 -a qr -d
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: argument -d: expected one argument
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -a -d cos
+python regoverviews.py localhost 5555 -a -d cos
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: argument -a: expected one argument
 Exit status = 2
 ------------------------------------------------------------------------
-python regoverviews.py localhost 555 -x
+python regoverviews.py localhost 5555 -x
 usage: regoverviews.py [-h] [-d dept] [-n num] [-a area] [-t title] host port
 regoverviews.py: error: unrecognized arguments: -x
 Exit status = 2

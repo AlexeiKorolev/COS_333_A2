@@ -20,59 +20,66 @@ class ChildThread (threading.Thread):
         self._sock = sock
 
     def run(self):
-        print("Spawned child thread")
-        with self._sock:
-            call = self._sock.makefile(mode="r", encoding='utf-8')
-            call_data = call.readline()
+        call = self._sock.makefile(mode="r", encoding='utf-8')
+        print(f"call: {call}")
+        call_data = call.readline()
+        print("GOT HERE!")
 
-            actual_call = json.loads(call_data)
-            print(f"Received request: {actual_call}")
-            if actual_call[0] == 'get_overviews':
-                
-                args = {
-                    "dept": None,
-                    "coursenum": None,
-                    "area": None,
-                    'title': None
-                }
-                given_args = actual_call[1]
+        actual_call = json.loads(call_data)
+        print(f"actual call: {actual_call}")
+        if actual_call[0] == 'get_overviews':
+            args = {
+                "dept": None,
+                "coursenum": None,
+                "area": None,
+                'title': None
+            }
+            given_args = actual_call[1]
 
-                for arg, val in given_args.items():
-                    args[arg] = val 
-                
-                payload =  return_overviews_query(department=args["dept"], 
-                                                course_number=args["coursenum"], 
-                                                distribution_area=args["area"], 
-                                                class_title=args["title"])
+            for arg, val in given_args.items():
+                args[arg] = val 
+            
+            payload =  return_overviews_query(department=args["dept"], 
+                                            course_number=args["coursenum"], 
+                                            distribution_area=args["area"], 
+                                            class_title=args["title"])
+            flo = self._sock.makefile(mode="w", encoding="utf-8")
+            # Potentially use inflo/outflo here
+            flo.write(json.dumps(payload) + "\n")
+            flo.flush()
+
+            # return json.dumps(payload)
+
+        elif actual_call[0] == 'get_details':
+            print(actual_call, type(actual_call[1]))
+            class_id = int(actual_call[1]) # the second argument is supposed to the class id
+            print("got past classid")
+            classinfo = get_class_info(class_id)
+
+            if not classinfo[0]:
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
-                # Potentially use inflo/outflo here
-                flo.write(json.dumps(payload) + "\n")
+                flo.write(json.dumps(classinfo) + "\n")
                 flo.flush()
 
-                # return json.dumps(payload)
+            # Return just the course number, which is [True, (coursenum, ....)].
+            infosets = get_course_info(classinfo[1][0])
 
-            elif actual_call[0] == 'get_details':
-                print(actual_call, type(actual_call[1]))
-                class_id = int(actual_call[1]) # the second argument is supposed to the class id
-                classinfo = get_class_info(class_id)
 
-                if not classinfo[0]:
-                    return json.dumps(classinfo) # return False with the exception
 
-                print(classinfo)
-                print(classinfo[1][0])
-                # Return just the course number, which is [True, (coursenum, ....)].
-                infosets = get_course_info(classinfo[1][0])
-
-                if not infosets[0]:
-                    return json.dumps(infosets) # Return False with the exception
-
-                sub_infosets = infosets[1][0]
-                payload = details_format(classinfo[1], sub_infosets[1], sub_infosets[2], sub_infosets[3])
-
+            if not infosets[0]:
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
-                flo.write(json.dumps(payload) + "\n")
+                flo.write(json.dumps(infosets) + "\n")
                 flo.flush()
+
+            # CHANGE THIS LATER
+            print(f"infosets here: {infosets[0]}")
+            payload = [True, details_format(classinfo[1], infosets[1], infosets[2], infosets[3])]
+
+            print(f"payload: {payload}")
+
+            flo = self._sock.makefile(mode="w", encoding="utf-8")
+            flo.write(json.dumps(payload) + "\n")
+            flo.flush()
         print("Closed socket in child thread")
         print("Exiting child thread")
 #-----------------------------------------------------------------------
@@ -128,10 +135,12 @@ def return_overviews_query(department='%', course_number='%',
                 table = cursor.fetchall() # fetch query results
                 order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
 
+                print("creating dictionized table")
 
                 # Converts each row in the table to a key: value dictionary
                 dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
 
+                print(f"Returning a table with {len(dictionized_table)} elements")
 
                 return True, dictionized_table
     except Exception as ex:
@@ -184,6 +193,8 @@ def get_course_info(classid):
                 WHERE c.courseid = ? ORDER BY dept ASC, coursenum ASC"""
                 cursor.execute(query, [classid])
                 crosslistings_info = cursor.fetchall()
+                print(f"crosslistings_info: {crosslistings_info}")
+                print(f"classid: {classid}")
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
@@ -195,10 +206,7 @@ def get_course_info(classid):
                         courseid = ? ORDER BY profname ASC"""
                 cursor.execute(query, [classid])
                 prof_info = cursor.fetchall()
-
-                # Ensure there was a response
-                if len(prof_info) == 0:
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
+                print(f"prof_info: {prof_info}")
 
                 return True, course_info, crosslistings_info, prof_info
 
@@ -209,6 +217,10 @@ def get_course_info(classid):
 
 # Formats the isolated responses into a data dictionary
 def details_format(class_info, course_info, crosslistings_info, res4):
+    print(f"courseinfo: {course_info}")
+    print(f"class_info: {class_info}")
+    print(f"res4: {res4}")
+    print(f"crosslistings_info: {crosslistings_info}")
     return {
         "classid": class_info[6],
         "courseid": class_info[0],
@@ -221,11 +233,10 @@ def details_format(class_info, course_info, crosslistings_info, res4):
                           for dept, coursenum in crosslistings_info],
         "area": course_info[0][0],
         "title": course_info[0][1],  
-        "description": course_info[0][2],  
+        "descrip": course_info[0][2],  
         "prereqs": course_info[0][3],  
         "profnames": [profname for profname, in res4]
     }
-
 
 
 #-----------------------------------------------------------------------
