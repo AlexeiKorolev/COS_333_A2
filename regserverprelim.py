@@ -139,11 +139,6 @@ def get_course_info(classid):
                 prof_info = cursor.fetchall()
                 print(f"prof_info: {prof_info}")
 
-                # Ensure there was a response
-                if len(prof_info) == 0:
-                    print("GOT HERE")
-                    return False, "regdetails.py: no class with " + f"classid {classid} exists"
-
                 return True, course_info, crosslistings_info, prof_info
 
     except Exception as ex:
