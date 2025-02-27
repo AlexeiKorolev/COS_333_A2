@@ -35,3 +35,5 @@ With respect to I/O and compute delays, in a high-volume environment under what 
 With respect to I/O and compute delays, in a high-volume environment under what circumstances is regserver.py not better than regserverprelim.py?
 
 - regserver.py performs similarly to regserverprelim.py when the compute delay is large, because switching threads does not solve the computation in the background; there's an equal amount of work to be done in both cases and switching threads won't help get it done.
+
+- regserver.py performs similarly to regserverprelim.py when the compute delay is large, because switching threads does not solve the computation in the background; there's an equal amount of work to be done in both cases and switching threads won't help get it done.
