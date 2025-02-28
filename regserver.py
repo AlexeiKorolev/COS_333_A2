@@ -11,7 +11,8 @@ import dotenv
 
 dotenv.load_dotenv()
 
-parser = argparse.ArgumentParser(description="Server for the registrar application")
+parser = argparse.ArgumentParser(description=
+                "Server for the registrar application")
 
 DATABASE_URL = r"file:reg.sqlite?mode=ro"
 TESTING = True
