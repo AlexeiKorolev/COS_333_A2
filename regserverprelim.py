@@ -47,22 +47,25 @@ def return_overviews_query(department='%', course_number='%',
     if department == '':
         department = '%'
     else:
-        pass
+        department = department.replace('_', r'\_') #Replace underscores
+        department = department.replace('%', r'\%') #Replace %'s
 
     if course_number == '':
         course_number = '%'
     else:
-        pass
+        course_number = course_number.replace('_', r'\_')
+        course_number = course_number.replace('%', r'\%')
 
     if distribution_area == '':
         distribution_area = '%' #To allow SQL to ignore
     else:
-        pass
-
+        distribution_area = distribution_area.replace('_', r'\_')
+        distribution_area = distribution_area.replace('%', r'\%')
     if class_title == '':
         class_title = '%' #To allow SQL to ignore
     else:
-        pass
+        class_title = class_title.replace('_', r'\_')
+        class_title = class_title.replace('%', r'\%')
 
 
     try:
@@ -104,7 +107,10 @@ def return_overviews_query(department='%', course_number='%',
 
                 return True, dictionized_table
     except Exception as ex:
-        return False, f"{sys.argv[0]}: {ex}"
+        print(str(ex))
+        return (False,
+                "A server error occurred. Please contact " +
+                "the system administrator.")
 
 
 
@@ -188,7 +194,10 @@ def get_course_info(classid):
                 return True, course_info, crosslistings_info, prof_info
 
     except Exception as ex:
-        return False, f"{sys.argv[0]}: {ex}"
+        print(str(ex))
+        return (False,
+                "A server error occurred. Please contact " +
+                "the system administrator.")
 
 
 # Formats the isolated responses into a data dictionary
