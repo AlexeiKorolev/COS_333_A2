@@ -6,11 +6,8 @@ import json
 import argparse
 import sqlite3 as sql
 import contextlib
-import textwrap
-import sys
 import threading
-import time
-import dotenv 
+import dotenv
 
 dotenv.load_dotenv()
 
@@ -29,7 +26,7 @@ except:
 """
 Function to actively consume CPU time, with delay being the
 number of seconds to perform computations.
-""" 
+"""
 def consume_cpu_time(delay):
     initial_thread_time = time.thread_time()
     while (time.thread_time() - initial_thread_time) < delay:
@@ -63,12 +60,13 @@ class ChildThread (threading.Thread):
                 given_args = actual_call[1]
 
                 for arg, val in given_args.items():
-                    args[arg] = val 
-                
-                payload =  return_overviews_query(department=args["dept"], 
-                                                course_number=args["coursenum"], 
-                                                distribution_area=args["area"], 
-                                                class_title=args["title"])
+                    args[arg] = val
+
+                payload =  return_overviews_query(
+                    department=args["dept"],
+                    course_number=args["coursenum"], 
+                    distribution_area=args["area"], 
+                    class_title=args["title"])
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
                 # Potentially use inflo/outflo here
                 flo.write(json.dumps(payload) + "\n")
@@ -314,7 +312,7 @@ def main():
 
         while True:
             try:
-                sock, client_addr = server_sock.accept()
+                sock, _ = server_sock.accept()
                 print('Accepted connection, opened socket')
                     
                 child_thread = ChildThread(sock)
