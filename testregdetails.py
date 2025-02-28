@@ -69,7 +69,8 @@ def main():
         exec_command(program, prefix + '8094')
         exec_command(program, prefix + '8285')
         exec_command(program, prefix + '8508')
-        exec_command(program, prefix + '7838') # should be error in row_missing.sqlite
+        exec_command(program, prefix + '7838')
+        # should be error in row_missing.sqlite
 
         #Testing erroneous command line arguments
         exec_command(program, prefix + '')
@@ -102,7 +103,7 @@ def main():
 
     os.remove('reg.sqlite')
     shutil.copy('reg_copy.sqlite', 'reg.sqlite')
-    
+
 
 
     # Add more tests here.

@@ -113,9 +113,7 @@ def main():
 
     os.remove('reg.sqlite')
     shutil.copy('reg_copy.sqlite', 'reg.sqlite')
-    
 
-    # Add more tests here.
 
 #-----------------------------------------------------------------------
 
