@@ -16,7 +16,7 @@ dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser()
 
-DATABASE_URL = r"file:reg.sqlite?mode=ro"
+DATABASE_URL = r"file:blah.sqlite?mode=ro"
 TESTING = True
 
 try:
@@ -26,14 +26,20 @@ except:
     CDELAY = 0 # Assume CDELAY and IODELAY = 0
     IODELAY = 0
 
-
-       
+"""
+Function to actively consume CPU time, with delay being the
+number of seconds to perform computations.
+""" 
 def consume_cpu_time(delay):
     initial_thread_time = time.thread_time()
     while (time.thread_time() - initial_thread_time) < delay:
         pass
 
 
+"""
+The ChildThread class is responsible for handling any calls to
+the server from the client by spawning a new thread.
+"""
 class ChildThread (threading.Thread):
     def __init__(self, sock):
         threading.Thread.__init__(self)
@@ -101,6 +107,12 @@ class ChildThread (threading.Thread):
         print("Exiting child thread")
 #-----------------------------------------------------------------------
 
+"""
+Returns a course overviews query from the database given a search substring
+for the department, course number, distribution area, and/or class title.
+If the query was successful, then the return tuple is (True, QUERY_RESULT), 
+and if the query failed, then the return looks like (False, ERROR_MESSAGE)
+"""
 def return_overviews_query(department='%', course_number='%',
                  distribution_area='%', class_title='%'):
     time.sleep(IODELAY)
@@ -162,7 +174,11 @@ def return_overviews_query(department='%', course_number='%',
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
 
-
+"""
+Given a classid, returns a tuple with True and a list containing the
+courseid, days, starttime, endtime, bldg, roomnum, and classid if the 
+classid exists, otherwise it returns (False, ERROR_MESSAGE)
+"""
 def get_class_info(classid):
     time.sleep(IODELAY)
     consume_cpu_time(CDELAY)
@@ -187,14 +203,17 @@ def get_class_info(classid):
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
-        print(str(ex))
-        return False, f"A server error occurred. Please contact the system administrator."
-    
-    #__o__
+        if str(ex) == "unable to open database file":
+            print(str(ex))
+            return False, f"A server error occurred. Please contact the system administrator."
+        return False, f"{sys.argv[0]}: {ex}"
 
-
-def get_course_info(classid):
-    classid = int(classid)
+"""
+Given the courseid, returns a tuple with (True, COURSE_INFO) if successful,
+and (False, ERROR_MESSAGE) otherwise.
+"""
+def get_course_info(courseid):
+    courseid = int(courseid)
     time.sleep(IODELAY)
     consume_cpu_time(CDELAY)
     try:
@@ -207,28 +226,28 @@ def get_course_info(classid):
                 # Get all info from courses on courseid
                 query = """SELECT area, title, descrip, prereqs
                         FROM courses c WHERE c.courseid = ?"""
-                cursor.execute(query, [classid])
+                cursor.execute(query, [courseid])
                 course_info = cursor.fetchall()
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "no class with " +f"classid {classid} exists"
+                    return False, "no class with " +f"courseid {courseid} exists"
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
                 WHERE c.courseid = ? ORDER BY dept ASC, coursenum ASC"""
-                cursor.execute(query, [classid])
+                cursor.execute(query, [courseid])
                 crosslistings_info = cursor.fetchall()
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"courseid {courseid} exists"
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs
                         WHERE coursesprofs.profid = profs.profid AND
                         courseid = ? ORDER BY profname ASC"""
-                cursor.execute(query, [classid])
+                cursor.execute(query, [courseid])
                 prof_info = cursor.fetchall()
 
                 return True, course_info, crosslistings_info, prof_info
@@ -236,7 +255,6 @@ def get_course_info(classid):
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
 
-# ['classid', 'courseid', 'days', 'starttime', 'endtime', 'bldg', 'roomnum', 'deptcoursenums': {'dept': ... , 'coursenum': ...}, 'area', 'title', 'descrip', 'prereqs', 'profnames': [...]]
 
 # Formats the isolated responses into a data dictionary
 def details_format(class_info, course_info, crosslistings_info, res4):
