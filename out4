@@ -1,5 +1,363 @@
 ------------------------------------------------------------------------
 python regdetails.py localhost 5555 8321
+-------------
+Class Details
+-------------
+Class Id: 8321
+Days: TTh
+Start time: 11:00 AM
+End time: 12:20 PM
+Building: FRIEN
+Room: 006
+--------------
+Course Details
+--------------
+Course Id: 3672
+Dept and Number: COS 333
+Area:
+Title: Advanced C%Science Programming Techniques
+Description: This is a course about the practice of programming.
+   Programming is more than just writing code.  Programmers must also
+   assess tradeoffs, choose among design alternatives, debug and test,
+   improve performance, and maintain software written by themselves &
+   others. At the same time, they must be concerned with compatibility,
+   robustness, and reliability, while meeting specifications.  Students
+   will have the opportunity to develop these skills by working on their
+   own code and in group projects.
+Prerequisites: COS 217 and COS 226.
+Professor: Brian W. Kernighan
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+-------------
+Class Details
+-------------
+Class Id: 9032
+Days: W
+Start time: 07:30 PM
+End time: 08:50 PM
+Building: ICAHN
+Room: ATR
+--------------
+Course Details
+--------------
+Course Id: 4026
+Dept and Number: CHM 233
+Dept and Number: COS 233
+Dept and Number: ISC 233
+Dept and Number: MOL 233
+Dept and Number: PHY 233
+Area: ST
+Title: An Integrated, Quantitative Introduction to the Natural Sciences
+   II
+Description: An integrated, mathematically and computationally
+   sophisticated introduction to physics and chemistry, drawing on
+   examples from biological systems.  This year-long 4 course sequence
+   is a multi-disciplinary course taught across 4 departments with the
+   following faculty involved in teaching the course: W. Bialek , C.
+   Callan, J. Shaevitz (PHY); D. Botstein (MOL); M. Singh (COS); E.
+   Carter (MAE).
+Prerequisites: Familiarity with calculus at the level of MAT 103/104 or
+   Advanced Placement Calculus BC, solid high school physics and
+   chemistry courses. Students must have completed ISC/CHM/COS/MOL/PHY
+   231 and 232 in the Fall.
+Professor: Curtis G. Callan
+Professor: David Botstein
+Professor: Mona Singh
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+-------------
+Class Details
+-------------
+Class Id: 7842
+Days: TTh
+Start time: 12:30 PM
+End time: 01:20 PM
+Building: ARCHB
+Room: N101
+--------------
+Course Details
+--------------
+Course Id: 3461
+Dept and Number: AAS 348
+Dept and Number: ENG 348
+Area: LA
+Title: Black Popular Music Culture
+Description: An introduction to major historical, theoretical,
+   performative, and aesthetic movements and trends in black popular
+   music culture from the 19th century through the present day.
+Prerequisites:
+Professor: Daphne A. Brooks
+Professor: Imani Perry
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+-------------
+Class Details
+-------------
+Class Id: 8094
+Days: MW
+Start time: 11:00 AM
+End time: 12:20 PM
+Building: EQUAA
+Room: A224
+--------------
+Course Details
+--------------
+Course Id: 3601
+Dept and Number: CHE 441
+Area:
+Title: Chemical Reaction Engineering
+Description: Introduction to chemical reaction engineering and reactor
+   design in chemical and biological processes.  Concepts of chemical
+   kinetics for both homogeneous and heterogeneous reactions.  Coupled
+   transport and chemical/biological rate processes.  Reaction network
+   analysis.
+Prerequisites: CHE 341. Audit not available for department
+   concentrators.
+Professor: Yannis G. Kevrekidis
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+-------------
+Class Details
+-------------
+Class Id: 8285
+Days: W
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: EPYNE
+Room: 127
+--------------
+Course Details
+--------------
+Course Id: 3662
+Dept and Number: COM 419
+Area: LA
+Title: Conceptions of the Sensory
+Description: In-depth discussion and analysis of conceptions of the
+   sensory in writings by philosophers, poets, art critics and
+   theorists, and artists, from the early modern to contemporary
+   periods.  We will investigate the ways in which the sensory is
+   understood as the necessary basis for conceptual thinking of diverse
+   kinds, including systematic and dialectical modes, philosophies,
+   imaginative and figural writing,  and theory and practice of the
+   plastic arts.
+Prerequisites:
+Professor: Claudia Joan Brodsky
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+-------------
+Class Details
+-------------
+Class Id: 8508
+Days: TTh
+Start time: 10:40 AM
+End time: 12:10 PM
+Building: FISHH
+Room: B06
+--------------
+Course Details
+--------------
+Course Id: 3755
+Dept and Number: ECO 541
+Area:
+Title: Industrial Organization and Public Policy
+Description: Methods for empirical and theoretical analysis of markets
+   composed of productive enterprises and their customers are studied.
+   Analyses are applied to modern market structures and practices, and
+   public policy towards them. Topics include the roles of technology
+   and information, the structure of firms, modes of interfirm
+   competition, determination of price, quality, and R & D investment,
+   and criteria for government intervention.
+Prerequisites:
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+-------------
+Class Details
+-------------
+Class Id: 7838
+Days: M
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: CHANC
+Room: 105
+--------------
+Course Details
+--------------
+Course Id: 3457
+Dept and Number: AAS 310
+Dept and Number: ENG 324
+Dept and Number: MUS 256
+Area: LA
+Title: Music from the Hispanophone Caribbean
+Description: This interdisciplinary seminar utilizes the musical
+   cultures of Puerto Rico, the Dominican Republic, and Cuba to reflect
+   upon the aesthetic, migratory, and social histories of the
+   Hispanophone Caribbean.  Students will listen to the sounded legacies
+   of conquest, slavery, colonialism, and U.S. intervention and
+   occupation. The effects of transnational migration on music's
+   performance and reception will also be one of the key themes in the
+   course.  We will not only consider the creative traditions and
+   receptive worlds embedded in musical recordings, but will also pay
+   attention to music's traces in literature, film, and other ephemera.
+Prerequisites:
+Professor: Alexandra T. Vazquez
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: no class with classid 9034 exists
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+-------------
+Class Details
+-------------
+Class Id: 7838
+Days: M
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: CHANC
+Room: 105
+--------------
+Course Details
+--------------
+Course Id: 3457
+Dept and Number: AAS 310
+Dept and Number: ENG 324
+Dept and Number: MUS 256
+Area: LA
+Title: Music from the Hispanophone Caribbean
+Description: This interdisciplinary seminar utilizes the musical
+   cultures of Puerto Rico, the Dominican Republic, and Cuba to reflect
+   upon the aesthetic, migratory, and social histories of the
+   Hispanophone Caribbean.  Students will listen to the sounded legacies
+   of conquest, slavery, colonialism, and U.S. intervention and
+   occupation. The effects of transnational migration on music's
+   performance and reception will also be one of the key themes in the
+   course.  We will not only consider the creative traditions and
+   receptive worlds embedded in musical recordings, but will also pay
+   attention to music's traces in literature, film, and other ephemera.
+Prerequisites:
+Professor: Alexandra T. Vazquez
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+-------------
+Class Details
+-------------
+Class Id: 7839
+Days: W
+Start time: 07:30 PM
+End time: 10:20 PM
+Building: MARXH
+Room: 101
+--------------
+Course Details
+--------------
+Course Id: 3458
+Dept and Number: AAS 314
+Dept and Number: COM 396
+Area: LA
+Title: Model Memoirs:  The Life Stories of International Fashion Models
+Description: Explores the life-writing of American, African, and Asian
+   women in the fashion industry as a launching point for thinking about
+   race, gender, and class. How do ethnicity and femininity intersect?
+   How are authenticity and difference commodified? How do women
+   construct identities through narrative and negotiate their
+   relationships to their bodies, families, and nations? This course
+   will include guest lectures by fashion editors and models;
+   discussions of contemporary television programs, global fashion, and
+   cultural studies; and student self-narratives about their
+   relationships with cultural standards of beauty, whether vexed or
+   not.
+Prerequisites: None
+Professor: Wendy L. Belcher
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+-------------
+Class Details
+-------------
+Class Id: 7840
+Days: T
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: STANH
+Room: 101
+--------------
+Course Details
+--------------
+Course Id: 3459
+Dept and Number: AAS 323
+Dept and Number: AMS 321
+Area: SA
+Title: The Black Melting Pot: Interrogating Race, Difference, and
+   Identity
+Description: As the demographics of Blacks in America change, we are
+   compelled to rethink the dominant stories of who African Americans
+   are, and from whence they come. In this seminar, we will explore the
+   deep cultural, genealogical, national origin, regional, and class-
+   based diversity of people of African descent in the United States.
+   Materials for the course will include scholarly writings as well as
+   memoirs and fiction. In addition to reading assignments, students
+   will be expected to complete an ethnographic or oral history project
+   based upon research conducted within a Black community in the U.S.,
+   and a music or visual art based presentation of work.
+Prerequisites:
+Professor: Imani Perry
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+-------------
+Class Details
+-------------
+Class Id: 7841
+Days: TTh
+Start time: 08:30 AM
+End time: 09:50 AM
+Building: STANH
+Room: 201
+--------------
+Course Details
+--------------
+Course Id: 3460
+Dept and Number: AAS 339
+Dept and Number: ENG 339
+Area: LA
+Title: Josephine Baker and the Modern
+Description: What does a black burlesque star have to do with the making
+   of Euro-American modernity? This course situates the performance art
+   of Josephine Baker as a dynamic fulcrum through which to trace the
+   unexpected connections between the invention of what might be called
+   a "modernist style" and the staging of black skin at the turn of the
+   20th century.  We will study her work in film, photography, and
+   cinema as an active and profound engagement with a range of modernist
+   innovations and theories in the fields of film, photography,
+   architecture, art, and literature.
+Prerequisites:
+Professor: Anne A. Cheng
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
 regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
@@ -61,14 +419,422 @@ Exit status = 1
 python regdetails.py localhost 5555 7841
 regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
-Traceback (most recent call last):
-  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/testregdetails.py", line 110, in <module>
-    main()
-  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/testregdetails.py", line 87, in main
-    shutil.copy('reg.sqlite', 'reg_copy.sqlite')
-  File "/opt/anaconda3/lib/python3.12/shutil.py", line 435, in copy
-    copyfile(src, dst, follow_symlinks=follow_symlinks)
-  File "/opt/anaconda3/lib/python3.12/shutil.py", line 260, in copyfile
-    with open(src, 'rb') as fsrc:
-         ^^^^^^^^^^^^^^^
-FileNotFoundError: [Errno 2] No such file or directory: 'reg.sqlite'
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
+-------------
+Class Details
+-------------
+Class Id: 8321
+Days: TTh
+Start time: 11:00 AM
+End time: 12:20 PM
+Building: FRIEN
+Room: 006
+--------------
+Course Details
+--------------
+Course Id: 3672
+Dept and Number: COS 333
+Area:
+Title: Advanced C%Science Programming Techniques
+Description: This is a course about the practice of programming.
+   Programming is more than just writing code.  Programmers must also
+   assess tradeoffs, choose among design alternatives, debug and test,
+   improve performance, and maintain software written by themselves &
+   others. At the same time, they must be concerned with compatibility,
+   robustness, and reliability, while meeting specifications.  Students
+   will have the opportunity to develop these skills by working on their
+   own code and in group projects.
+Prerequisites: COS 217 and COS 226.
+Professor: Brian W. Kernighan
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+-------------
+Class Details
+-------------
+Class Id: 9032
+Days: W
+Start time: 07:30 PM
+End time: 08:50 PM
+Building: ICAHN
+Room: ATR
+--------------
+Course Details
+--------------
+Course Id: 4026
+Dept and Number: CHM 233
+Dept and Number: COS 233
+Dept and Number: ISC 233
+Dept and Number: MOL 233
+Dept and Number: PHY 233
+Area: ST
+Title: An Integrated, Quantitative Introduction to the Natural Sciences
+   II
+Description: An integrated, mathematically and computationally
+   sophisticated introduction to physics and chemistry, drawing on
+   examples from biological systems.  This year-long 4 course sequence
+   is a multi-disciplinary course taught across 4 departments with the
+   following faculty involved in teaching the course: W. Bialek , C.
+   Callan, J. Shaevitz (PHY); D. Botstein (MOL); M. Singh (COS); E.
+   Carter (MAE).
+Prerequisites: Familiarity with calculus at the level of MAT 103/104 or
+   Advanced Placement Calculus BC, solid high school physics and
+   chemistry courses. Students must have completed ISC/CHM/COS/MOL/PHY
+   231 and 232 in the Fall.
+Professor: Curtis G. Callan
+Professor: David Botstein
+Professor: Mona Singh
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+-------------
+Class Details
+-------------
+Class Id: 7842
+Days: TTh
+Start time: 12:30 PM
+End time: 01:20 PM
+Building: ARCHB
+Room: N101
+--------------
+Course Details
+--------------
+Course Id: 3461
+Dept and Number: AAS 348
+Dept and Number: ENG 348
+Area: LA
+Title: Black Popular Music Culture
+Description: An introduction to major historical, theoretical,
+   performative, and aesthetic movements and trends in black popular
+   music culture from the 19th century through the present day.
+Prerequisites:
+Professor: Daphne A. Brooks
+Professor: Imani Perry
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+-------------
+Class Details
+-------------
+Class Id: 8094
+Days: MW
+Start time: 11:00 AM
+End time: 12:20 PM
+Building: EQUAA
+Room: A224
+--------------
+Course Details
+--------------
+Course Id: 3601
+Dept and Number: CHE 441
+Area:
+Title: Chemical Reaction Engineering
+Description: Introduction to chemical reaction engineering and reactor
+   design in chemical and biological processes.  Concepts of chemical
+   kinetics for both homogeneous and heterogeneous reactions.  Coupled
+   transport and chemical/biological rate processes.  Reaction network
+   analysis.
+Prerequisites: CHE 341. Audit not available for department
+   concentrators.
+Professor: Yannis G. Kevrekidis
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+-------------
+Class Details
+-------------
+Class Id: 8285
+Days: W
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: EPYNE
+Room: 127
+--------------
+Course Details
+--------------
+Course Id: 3662
+Dept and Number: COM 419
+Area: LA
+Title: Conceptions of the Sensory
+Description: In-depth discussion and analysis of conceptions of the
+   sensory in writings by philosophers, poets, art critics and
+   theorists, and artists, from the early modern to contemporary
+   periods.  We will investigate the ways in which the sensory is
+   understood as the necessary basis for conceptual thinking of diverse
+   kinds, including systematic and dialectical modes, philosophies,
+   imaginative and figural writing,  and theory and practice of the
+   plastic arts.
+Prerequisites:
+Professor: Claudia Joan Brodsky
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+-------------
+Class Details
+-------------
+Class Id: 8508
+Days: TTh
+Start time: 10:40 AM
+End time: 12:10 PM
+Building: FISHH
+Room: B06
+--------------
+Course Details
+--------------
+Course Id: 3755
+Dept and Number: ECO 541
+Area:
+Title: Industrial Organization and Public Policy
+Description: Methods for empirical and theoretical analysis of markets
+   composed of productive enterprises and their customers are studied.
+   Analyses are applied to modern market structures and practices, and
+   public policy towards them. Topics include the roles of technology
+   and information, the structure of firms, modes of interfirm
+   competition, determination of price, quality, and R & D investment,
+   and criteria for government intervention.
+Prerequisites:
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+-------------
+Class Details
+-------------
+Class Id: 7838
+Days: M
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: CHANC
+Room: 105
+--------------
+Course Details
+--------------
+Course Id: 3457
+Dept and Number: AAS 310
+Dept and Number: ENG 324
+Dept and Number: MUS 256
+Area: LA
+Title: Music from the Hispanophone Caribbean
+Description: This interdisciplinary seminar utilizes the musical
+   cultures of Puerto Rico, the Dominican Republic, and Cuba to reflect
+   upon the aesthetic, migratory, and social histories of the
+   Hispanophone Caribbean.  Students will listen to the sounded legacies
+   of conquest, slavery, colonialism, and U.S. intervention and
+   occupation. The effects of transnational migration on music's
+   performance and reception will also be one of the key themes in the
+   course.  We will not only consider the creative traditions and
+   receptive worlds embedded in musical recordings, but will also pay
+   attention to music's traces in literature, film, and other ephemera.
+Prerequisites:
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: no class with classid 9034 exists
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+-------------
+Class Details
+-------------
+Class Id: 7838
+Days: M
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: CHANC
+Room: 105
+--------------
+Course Details
+--------------
+Course Id: 3457
+Dept and Number: AAS 310
+Dept and Number: ENG 324
+Dept and Number: MUS 256
+Area: LA
+Title: Music from the Hispanophone Caribbean
+Description: This interdisciplinary seminar utilizes the musical
+   cultures of Puerto Rico, the Dominican Republic, and Cuba to reflect
+   upon the aesthetic, migratory, and social histories of the
+   Hispanophone Caribbean.  Students will listen to the sounded legacies
+   of conquest, slavery, colonialism, and U.S. intervention and
+   occupation. The effects of transnational migration on music's
+   performance and reception will also be one of the key themes in the
+   course.  We will not only consider the creative traditions and
+   receptive worlds embedded in musical recordings, but will also pay
+   attention to music's traces in literature, film, and other ephemera.
+Prerequisites:
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+-------------
+Class Details
+-------------
+Class Id: 7839
+Days: W
+Start time: 07:30 PM
+End time: 10:20 PM
+Building: MARXH
+Room: 101
+--------------
+Course Details
+--------------
+Course Id: 3458
+Dept and Number: AAS 314
+Dept and Number: COM 396
+Area: LA
+Title: Model Memoirs:  The Life Stories of International Fashion Models
+Description: Explores the life-writing of American, African, and Asian
+   women in the fashion industry as a launching point for thinking about
+   race, gender, and class. How do ethnicity and femininity intersect?
+   How are authenticity and difference commodified? How do women
+   construct identities through narrative and negotiate their
+   relationships to their bodies, families, and nations? This course
+   will include guest lectures by fashion editors and models;
+   discussions of contemporary television programs, global fashion, and
+   cultural studies; and student self-narratives about their
+   relationships with cultural standards of beauty, whether vexed or
+   not.
+Prerequisites: None
+Professor: Wendy L. Belcher
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+-------------
+Class Details
+-------------
+Class Id: 7840
+Days: T
+Start time: 01:30 PM
+End time: 04:20 PM
+Building: STANH
+Room: 101
+--------------
+Course Details
+--------------
+Course Id: 3459
+Dept and Number: AAS 323
+Dept and Number: AMS 321
+Area: SA
+Title: The Black Melting Pot: Interrogating Race, Difference, and
+   Identity
+Description: As the demographics of Blacks in America change, we are
+   compelled to rethink the dominant stories of who African Americans
+   are, and from whence they come. In this seminar, we will explore the
+   deep cultural, genealogical, national origin, regional, and class-
+   based diversity of people of African descent in the United States.
+   Materials for the course will include scholarly writings as well as
+   memoirs and fiction. In addition to reading assignments, students
+   will be expected to complete an ethnographic or oral history project
+   based upon research conducted within a Black community in the U.S.,
+   and a music or visual art based presentation of work.
+Prerequisites:
+Professor: Imani Perry
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+-------------
+Class Details
+-------------
+Class Id: 7841
+Days: TTh
+Start time: 08:30 AM
+End time: 09:50 AM
+Building: STANH
+Room: 201
+--------------
+Course Details
+--------------
+Course Id: 3460
+Dept and Number: AAS 339
+Dept and Number: ENG 339
+Area: LA
+Title: Josephine Baker and the Modern
+Description: What does a black burlesque star have to do with the making
+   of Euro-American modernity? This course situates the performance art
+   of Josephine Baker as a dynamic fulcrum through which to trace the
+   unexpected connections between the invention of what might be called
+   a "modernist style" and the staging of black skin at the turn of the
+   20th century.  We will study her work in film, photography, and
+   cinema as an active and profound engagement with a range of modernist
+   innovations and theories in the fields of film, photography,
+   architecture, art, and literature.
+Prerequisites:
+Professor: Anne A. Cheng
+Exit status = 0
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1

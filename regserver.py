@@ -16,7 +16,7 @@ dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser()
 
-DATABASE_URL = r"file:blah.sqlite?mode=ro"
+DATABASE_URL = r"file:reg.sqlite?mode=ro"
 TESTING = True
 
 try:
@@ -187,10 +187,10 @@ def get_class_info(classid):
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
-        if str(ex) == "unable to open database file":
-            print(str(ex))
-            return False, f"A server error occurred. Please contact the system administrator."
-        return False, f"{sys.argv[0]}: {ex}"
+        print(str(ex))
+        return False, f"A server error occurred. Please contact the system administrator."
+    
+    #__o__
 
 
 def get_course_info(classid):
