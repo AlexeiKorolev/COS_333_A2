@@ -8,6 +8,7 @@
 import os
 import sys
 import argparse
+import shutil
 
 #-----------------------------------------------------------------------
 
@@ -82,6 +83,26 @@ def main():
         exec_command(program, prefix + '7841')
 
     test_commands()
+
+    shutil.copy('reg.sqlite', 'reg_copy.sqlite')
+    os.remove('reg.sqlite')
+    shutil.copy('blank.sqlite', 'reg.sqlite')
+
+    test_commands()
+
+    os.remove('reg.sqlite')
+    shutil.copy('row_missing.sqlite', 'reg.sqlite')
+
+    test_commands()
+
+    os.remove('reg.sqlite')
+    shutil.copy('table_missing.sqlite', 'reg.sqlite')
+
+    test_commands()
+
+    shutil.copy('reg_copy.sqlite', 'reg.sqlite')
+    os.remove('reg.sqlite')
+    
 
     # Add more tests here.
 
