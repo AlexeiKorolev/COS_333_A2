@@ -10,7 +10,9 @@ import dotenv
 
 dotenv.load_dotenv()
 
-parser = argparse.ArgumentParser()
+parser = argparse.ArgumentParser(description="Server for \
+                                the registrar application")
+
 
 DATABASE_URL = r"file:reg.sqlite?mode=ro"
 TESTING = True
@@ -296,7 +298,17 @@ def main():
         sys.exit(1)
 
     try:
-        port = int(sys.argv[1])
+        parser.add_argument(dest="port", metavar="port",
+        help="the port at which the server is listening",
+                            type=int)
+        args = parser.parse_args()
+    except Exception as ex:
+        print(ex, file=sys.stderr)
+        sys.exit(2)
+
+    try:
+
+        port = args.port
 
         server_sock = socket.socket()
         print('Opened server socket')
