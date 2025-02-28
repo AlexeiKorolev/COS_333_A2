@@ -61,3 +61,192 @@ Exit status = 1
 python regdetails.py localhost 5555 7841
 regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9032
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7842
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8094
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8285
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8508
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
+Exit status = 2
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 9034
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7839
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7840
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1
+------------------------------------------------------------------------
+python regdetails.py localhost 5555 7841
+regdetails.py: A server error occurred. Please contact the system administrator.
+Exit status = 1

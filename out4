@@ -61,3 +61,14 @@ Exit status = 1
 python regdetails.py localhost 5555 7841
 regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
+Traceback (most recent call last):
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/testregdetails.py", line 110, in <module>
+    main()
+  File "/Users/vs/Documents/Spring 2025/COS 333/Assignments/Assignment 2/COS_333_A2/testregdetails.py", line 87, in main
+    shutil.copy('reg.sqlite', 'reg_copy.sqlite')
+  File "/opt/anaconda3/lib/python3.12/shutil.py", line 435, in copy
+    copyfile(src, dst, follow_symlinks=follow_symlinks)
+  File "/opt/anaconda3/lib/python3.12/shutil.py", line 260, in copyfile
+    with open(src, 'rb') as fsrc:
+         ^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'reg.sqlite'
