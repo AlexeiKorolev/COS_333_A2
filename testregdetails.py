@@ -100,9 +100,10 @@ def main():
 
     test_commands()
 
-    shutil.copy('reg_copy.sqlite', 'reg.sqlite')
     os.remove('reg.sqlite')
+    shutil.copy('reg_copy.sqlite', 'reg.sqlite')
     
+
 
     # Add more tests here.
 
