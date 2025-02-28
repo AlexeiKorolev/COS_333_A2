@@ -5,19 +5,43 @@ import json
 import argparse
 import sqlite3 as sql
 import contextlib
+import time
+import dotenv
+
+dotenv.load_dotenv()
 
 parser = argparse.ArgumentParser()
 
 DATABASE_URL = r"file:reg.sqlite?mode=ro"
 TESTING = True
+
+try:
+    CDELAY = int(os.environ.get("CDELAY", "0"))
+    IODELAY = int(os.environ.get("IODELAY", "0"))
+except Exception:
+    CDELAY = 0 # Assume CDELAY and IODELAY = 0
+    IODELAY = 0
+
+
+
+# Function to actively consume CPU time, with delay being the
+# number of seconds to perform computations.
+def consume_cpu_time(delay):
+    initial_thread_time = time.thread_time()
+    while (time.thread_time() - initial_thread_time) < delay:
+        pass
+
 #-----------------------------------------------------------------------
 
-"""
-Returns a course overviews query from the database given a search substring
-for the department, course number, distribution area, and/or class title.
-If the query was successful, then the return tuple is (True, QUERY_RESULT), 
-and if the query failed, then the return looks like (False, ERROR_MESSAGE)
-"""
+
+# Returns a course overviews query from the
+# database given a search substring
+# for the department, course number, distribution
+# area, and/or class title.
+# If the query was successful, then the return tuple
+# is (True, QUERY_RESULT),
+# and if the query failed, then the return looks
+# like (False, ERROR_MESSAGE)
 def return_overviews_query(department='%', course_number='%',
                  distribution_area='%', class_title='%'):
     if department == '':
@@ -42,6 +66,9 @@ def return_overviews_query(department='%', course_number='%',
 
 
     try:
+        time.sleep(IODELAY)
+        consume_cpu_time(CDELAY)
+
         with sql.connect(DATABASE_URL,
             isolation_level=None, uri=True) as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -80,13 +107,14 @@ def return_overviews_query(department='%', course_number='%',
         return False, f"{sys.argv[0]}: {ex}"
 
 
-"""
-Given a classid, returns a tuple with True and a list containing the
-courseid, days, starttime, endtime, bldg, roomnum, and classid if the 
-classid exists, otherwise it returns (False, ERROR_MESSAGE)
-"""
+
+# Given a classid, returns a tuple with True and a list containing the
+# courseid, days, starttime, endtime, bldg, roomnum, and classid if the
+# classid exists, otherwise it returns (False, ERROR_MESSAGE)
 def get_class_info(classid):
     try:
+        time.sleep(IODELAY)
+        consume_cpu_time(CDELAY)
         # Connect to database
         with sql.connect(DATABASE_URL,
                          isolation_level=None, uri=True) as connection:
@@ -111,13 +139,15 @@ def get_class_info(classid):
                 "A server error occurred. Please contact " +
                 "the system administrator.")
 
-"""
-Given the courseid, returns a tuple with (True, COURSE_INFO) if successful,
-and (False, ERROR_MESSAGE) otherwise.
-"""
+
+# Given the courseid, returns a tuple with (True, COURSE_INFO)
+# if successful,
+# and (False, ERROR_MESSAGE) otherwise.
 def get_course_info(classid):
     classid = int(classid)
     try:
+        time.sleep(IODELAY)
+        consume_cpu_time(CDELAY)
         # Connect to the database
         with sql.connect(DATABASE_URL, isolation_level=None,
                          uri=True) as connection:
@@ -248,11 +278,9 @@ def handle_client(sock):
         flo.flush()
 #-----------------------------------------------------------------------
 
-"""
-Runs the main process. Starts a server at the given port, and returns
-the queries sent in by the client. Supports the get_details and 
-get_overviews functions
-"""
+# Runs the main process. Starts a server at the given port, and returns
+# the queries sent in by the client. Supports the get_details and
+# get_overviews functions
 def main():
     if len(sys.argv) != 2:
         print('Usage: python %s port' % sys.argv[0])
