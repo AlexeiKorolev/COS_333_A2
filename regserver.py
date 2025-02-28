@@ -278,7 +278,11 @@ def details_format(class_info, course_info, crosslistings_info, res4):
 
 
 #-----------------------------------------------------------------------
-
+"""
+Runs the main process. Starts a server at the given port, and returns
+the queries sent in by the client. Supports the get_details and 
+get_overviews functions. Uses multithreading
+"""
 def main():
     if len(sys.argv) != 2:
         print('Usage: python %s port' % sys.argv[0])
