@@ -1,63 +1,63 @@
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 8321
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 8321
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 9032
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 9032
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7842
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7842
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 8094
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 8094
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 8285
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 8285
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 8508
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 8508
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7838
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 
-usage: ref_regdetails.pyc [-h] host port classid
-ref_regdetails.pyc: error: the following arguments are required: classid
+python regdetails.py localhost 5555 
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: the following arguments are required: classid
 Exit status = 2
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 8321 9032
-usage: ref_regdetails.pyc [-h] host port classid
-ref_regdetails.pyc: error: unrecognized arguments: 9032
+python regdetails.py localhost 5555 8321 9032
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: unrecognized arguments: 9032
 Exit status = 2
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 abc123
-usage: ref_regdetails.pyc [-h] host port classid
-ref_regdetails.pyc: error: argument classid: invalid int value: 'abc123'
+python regdetails.py localhost 5555 abc123
+usage: regdetails.py [-h] host port classid
+regdetails.py: error: argument classid: invalid int value: 'abc123'
 Exit status = 2
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 9034
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 9034
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7838
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7838
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7839
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7839
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7840
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7840
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
 ------------------------------------------------------------------------
-python ref_regdetails.pyc localhost 5555 7841
-ref_regdetails.pyc: regserver.py: unable to open database file
+python regdetails.py localhost 5555 7841
+regdetails.py: A server error occurred. Please contact the system administrator.
 Exit status = 1
