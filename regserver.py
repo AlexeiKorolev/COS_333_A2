@@ -19,24 +19,19 @@ TESTING = True
 try:
     CDELAY = int(os.environ.get("CDELAY", "0"))
     IODELAY = int(os.environ.get("IODELAY", "0"))
-except:
+except Exception:
     CDELAY = 0 # Assume CDELAY and IODELAY = 0
     IODELAY = 0
 
-"""
-Function to actively consume CPU time, with delay being the
-number of seconds to perform computations.
-"""
+# Function to actively consume CPU time, with delay being the
+# number of seconds to perform computations.
 def consume_cpu_time(delay):
     initial_thread_time = time.thread_time()
     while (time.thread_time() - initial_thread_time) < delay:
         pass
 
-
-"""
-The ChildThread class is responsible for handling any calls to
-the server from the client by spawning a new thread.
-"""
+# The ChildThread class is responsible for handling any calls to
+# the server from the client by spawning a new thread.
 class ChildThread (threading.Thread):
     def __init__(self, sock):
         threading.Thread.__init__(self)
@@ -110,12 +105,14 @@ class ChildThread (threading.Thread):
         print("Exiting child thread")
 #-----------------------------------------------------------------------
 
-"""
-Returns a course overviews query from the database given a search substring
-for the department, course number, distribution area, and/or class title.
-If the query was successful, then the return tuple is (True, QUERY_RESULT), 
-and if the query failed, then the return looks like (False, ERROR_MESSAGE)
-"""
+# Returns a course overviews query from the
+# database given a search substring
+# for the department, course number, distribution
+# area, and/or class title.
+# If the query was successful, then the return
+# tuple is (True, QUERY_RESULT),
+# and if the query failed, then the return looks
+# like (False, ERROR_MESSAGE)
 def return_overviews_query(department='%', course_number='%',
                  distribution_area='%', class_title='%'):
     time.sleep(IODELAY)
@@ -123,27 +120,23 @@ def return_overviews_query(department='%', course_number='%',
     if department == '':
         department = '%'
     else:
-        pass
         department = department.replace('_', r'\_') #Replace underscores
         department = department.replace('%', r'\%') #Replace %'s
 
     if course_number == '':
         course_number = '%'
     else:
-        pass
         course_number = course_number.replace('_', r'\_')
         course_number = course_number.replace('%', r'\%')
 
     if distribution_area == '':
         distribution_area = '%' #To allow SQL to ignore
     else:
-        pass
         distribution_area = distribution_area.replace('_', r'\_')
         distribution_area = distribution_area.replace('%', r'\%')
     if class_title == '':
         class_title = '%' #To allow SQL to ignore
     else:
-        pass
         class_title = class_title.replace('_', r'\_')
         class_title = class_title.replace('%', r'\%')
 
@@ -167,10 +160,13 @@ def return_overviews_query(department='%', course_number='%',
                                         '%' + class_title + '%']) 
                 #Prevent SQL injections
                 table = cursor.fetchall() # fetch query results
-                order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
+                order_of_keys = ['classid', 'dept',
+                                 'coursenum', 'area', 'title']
 
-                # Converts each row in the table to a key: value dictionary
-                dictionized_table = [dict(zip(order_of_keys, row)) for row in table]
+                # Converts each row in the table to a key: value
+                # dictionary
+                dictionized_table = [dict(zip(order_of_keys, row))
+                        for row in table]
 
                 return True, dictionized_table
     except Exception as ex:
@@ -179,11 +175,9 @@ def return_overviews_query(department='%', course_number='%',
                 "A server error occurred. Please contact " +
                 "the system administrator.")
 
-"""
-Given a classid, returns a tuple with True and a list containing the
-courseid, days, starttime, endtime, bldg, roomnum, and classid if the 
-classid exists, otherwise it returns (False, ERROR_MESSAGE)
-"""
+# Given a classid, returns a tuple with True and a list containing the
+# courseid, days, starttime, endtime, bldg, roomnum, and classid if the
+# classid exists, otherwise it returns (False, ERROR_MESSAGE)
 def get_class_info(classid):
     time.sleep(IODELAY)
     consume_cpu_time(CDELAY)
@@ -204,7 +198,8 @@ def get_class_info(classid):
 
                 # Ensure there was a response
                 if len(table) == 0:
-                    return False, "no class with " + f"classid {classid} exists"
+                    return (False, "no class with " +
+                            f"classid {classid} exists")
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
@@ -213,10 +208,9 @@ def get_class_info(classid):
                 "A server error occurred. Please contact " +
                 "the system administrator.")
 
-"""
-Given the courseid, returns a tuple with (True, COURSE_INFO) if successful,
-and (False, ERROR_MESSAGE) otherwise.
-"""
+# Given the courseid, returns a tuple with
+# (True, COURSE_INFO) if successful,
+# and (False, ERROR_MESSAGE) otherwise.
 def get_course_info(courseid):
     courseid = int(courseid)
     time.sleep(IODELAY)
@@ -236,7 +230,8 @@ def get_course_info(courseid):
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "no class with " +f"courseid {courseid} exists"
+                    return (False, "no class with " +
+                            f"courseid {courseid} exists")
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
@@ -246,7 +241,8 @@ def get_course_info(courseid):
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "no class with " + f"courseid {courseid} exists"
+                    return (False, "no class with " +
+                        f"courseid {courseid} exists")
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs
@@ -283,17 +279,16 @@ def details_format(class_info, course_info, crosslistings_info, res4):
 
 
 #-----------------------------------------------------------------------
-"""
-Runs the main process. Starts a server at the given port, and returns
-the queries sent in by the client. Supports the get_details and 
-get_overviews functions. Uses multithreading
-"""
+# Runs the main process. Starts a server at the given port, and returns
+# the queries sent in by the client. Supports the get_details and
+# get_overviews functions. Uses multithreading
 def main():
     if len(sys.argv) != 2:
         print('Usage: python %s port' % sys.argv[0])
         sys.exit(1)
     try:
-        parser.add_argument(dest="port", metavar="port",help="the port at which the server is listening",
+        parser.add_argument(dest="port", metavar="port",
+        help="the port at which the server is listening",
                             type=int)
         args = parser.parse_args()
     except Exception as ex:
@@ -301,14 +296,14 @@ def main():
         sys.exit(2)
 
     try:
-        
 
         port = args.port
 
         server_sock = socket.socket()
         print('Opened server socket')
         if os.name != 'nt':
-            server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            server_sock.setsockopt(socket.SOL_SOCKET,
+                    socket.SO_REUSEADDR, 1)
         server_sock.bind(('', port))
         print('Bound server socket to port')
         server_sock.listen()
@@ -318,7 +313,7 @@ def main():
             try:
                 sock, _ = server_sock.accept()
                 print('Accepted connection, opened socket')
-                    
+
                 child_thread = ChildThread(sock)
                 child_thread.start()
             except Exception as ex:
