@@ -4,7 +4,9 @@ import sys
 import json
 import textwrap
 
-parser = argparse.ArgumentParser(description = "Registrar application: show details about a class")
+parser = argparse.ArgumentParser(description =
+                    "Registrar application: \
+                    show details about a class")
 
 # Not formatting responses correctly
 def format_reg_response(dict_results):
@@ -13,48 +15,37 @@ def format_reg_response(dict_results):
     output.append("Class Details")
     output.append("-------------")
     # Get results from dictionary
-    classid = dict_results['classid']
-    output.append(f"Class Id: {classid}")
 
-    days = dict_results['days']
-    output.append(f"Days: {days}")
+    output.append(f"Class Id: {dict_results['classid']}")
 
-    starttime = dict_results['starttime']
-    output.append(f"Start time: {starttime}")
+    output.append(f"Days: {dict_results['days']}")
 
-    endtime = dict_results['endtime']
-    output.append(f"End time: {endtime}")
+    output.append(f"Start time: {dict_results['starttime']}")
 
-    bldg = dict_results['bldg']
-    output.append(f"Building: {bldg}")
+    output.append(f"End time: {dict_results['endtime']}")
 
-    room = dict_results['roomnum']
-    output.append(f"Room: {room}")
+    output.append(f"Building: {dict_results['bldg']}")
+
+    output.append(f"Room: {dict_results['roomnum']}")
 
     output.append("--------------")
     output.append("Course Details")
     output.append("--------------")
-    courseid = dict_results['courseid']
-    output.append(f"Course Id: {courseid}")
+    output.append(f"Course Id: {dict_results['courseid']}")
 
-    dept_and_number = dict_results['deptcoursenums']
-    for item in dept_and_number:
-        output.append(f"Dept and Number: {item['dept'] + " " + item['coursenum']}")
+    for item in dict_results['deptcoursenums']:
+        output.append(f"Dept and Number: {item['dept'] +
+                        " " + item['coursenum']}")
 
-    area = dict_results['area']
-    output.append(f"Area: {area}")
+    output.append(f"Area: {dict_results['area']}")
 
-    title = dict_results['title']
-    output.append(f"Title: {title}")
+    output.append(f"Title: {dict_results['title']}")
 
-    description = dict_results['descrip']
-    output.append(f"Description: {description}")
+    output.append(f"Description: {dict_results['descrip']}")
 
-    prerequisites = dict_results['prereqs']
-    output.append(f"Prerequisites: {prerequisites}")
-    
-    profnames = dict_results['profnames']
-    for prof in profnames:
+    output.append(f"Prerequisites: {dict_results['prereqs']}")
+
+    for prof in dict_results['profnames']:
         output.append(f"Professor: {prof}")
 
     for row in output:
@@ -62,18 +53,24 @@ def format_reg_response(dict_results):
                                      width=72,subsequent_indent='   ')
         print(wrapped_text)
 
-    
+
     # Formatting based on requirements
 
 
 def main():
     # Set up help options
-    
-    parser.add_argument(dest="host", metavar="host",help="the computer on which the server is running",
+
+    parser.add_argument(dest="host", metavar="host",
+                        help="the computer on \
+                        which the server is running",
                         type=str)
-    parser.add_argument(dest="port", metavar="port",help="the port at which the server is listening",
+    parser.add_argument(dest="port", metavar="port",
+                        help="the port at which the \
+                            server is listening",
                         type=int)
-    parser.add_argument(dest="classid", metavar="classid",help="the id of the class whose details should be shown",
+    parser.add_argument(dest="classid", metavar="classid",
+                        help="the id of the class whose \
+                            details should be shown",
                         type=int)
     args = parser.parse_args()
 
@@ -85,9 +82,10 @@ def main():
 
         with socket.socket() as sock:
             sock.connect((host, port))
-            
+
             flo = sock.makefile(mode='w', encoding='utf-8')
-            flo.write(json.dumps(payload) + '\n') # This needs to have \n for write to work correctly
+            flo.write(json.dumps(payload) + '\n')
+            # This needs to have \n for write to work correctly
             flo.flush()
 
             flo.close()
@@ -109,5 +107,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
