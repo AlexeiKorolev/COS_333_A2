@@ -98,7 +98,8 @@ def get_class_info(classid):
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
-        return False, f"{sys.argv[0]}: {ex}"
+        print(str(ex))
+        return False, f"A server error occurred. Please contact the system administrator."
 
 
 def get_course_info(classid):
