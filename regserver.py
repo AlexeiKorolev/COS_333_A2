@@ -172,7 +172,11 @@ def return_overviews_query(department='%', course_number='%',
 
                 return True, dictionized_table
     except Exception as ex:
-        return False, f"{sys.argv[0]}: {ex}"
+        print("HELLOOOOO")
+        print(str(ex))
+        return (False,
+                "A server error occurred. Please contact " +
+                "the system administrator.")
 
 """
 Given a classid, returns a tuple with True and a list containing the
