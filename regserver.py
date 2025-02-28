@@ -64,8 +64,8 @@ class ChildThread (threading.Thread):
 
                 payload =  return_overviews_query(
                     department=args["dept"],
-                    course_number=args["coursenum"], 
-                    distribution_area=args["area"], 
+                    course_number=args["coursenum"],
+                    distribution_area=args["area"],
                     class_title=args["title"])
                 flo = self._sock.makefile(mode="w", encoding="utf-8")
                 # Potentially use inflo/outflo here
@@ -75,29 +75,35 @@ class ChildThread (threading.Thread):
                 # return json.dumps(payload)
 
             elif actual_call[0] == 'get_details':
-                class_id = int(actual_call[1]) # the second argument is supposed to the class id
+                class_id = int(actual_call[1])
+                # the second argument is supposed to the class id
                 classinfo = get_class_info(class_id)
 
                 if not classinfo[0]:
-                    flo = self._sock.makefile(mode="w", encoding="utf-8")
+                    flo = self._sock.makefile(
+                        mode="w", encoding="utf-8")
                     flo.write(json.dumps(classinfo) + "\n")
                     flo.flush()
                 else:
 
-                    # Return just the course number, which is [True, (coursenum, ....)].
+                    # Return just the course number, which is
+                    # [True, (coursenum, ....)].
                     infosets = get_course_info(classinfo[1][0])
 
 
 
                     if not infosets[0]:
-                        flo = self._sock.makefile(mode="w", encoding="utf-8")
+                        flo = self._sock.makefile(mode="w",
+                            encoding="utf-8")
                         flo.write(json.dumps(infosets) + "\n")
                         flo.flush()
-                    
-                    else:
-                        payload = [True, details_format(classinfo[1], infosets[1], infosets[2], infosets[3])]
 
-                        flo = self._sock.makefile(mode="w", encoding="utf-8")
+                    else:
+                        payload = [True, details_format(
+                classinfo[1], infosets[1], infosets[2], infosets[3])]
+
+                        flo = self._sock.makefile(mode="w",
+                                                  encoding="utf-8")
                         flo.write(json.dumps(payload) + "\n")
                         flo.flush()
         print("Closed socket in child thread")
@@ -142,7 +148,6 @@ def return_overviews_query(department='%', course_number='%',
         class_title = class_title.replace('%', r'\%')
 
     try:
-        
         with sql.connect(DATABASE_URL,
             isolation_level=None, uri=True) as connection:
             with contextlib.closing(connection.cursor()) as cursor:
@@ -165,11 +170,10 @@ def return_overviews_query(department='%', course_number='%',
                 order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
 
                 # Converts each row in the table to a key: value dictionary
-                dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
+                dictionized_table = [dict(zip(order_of_keys, row)) for row in table]
 
                 return True, dictionized_table
     except Exception as ex:
-        print("HELLOOOOO")
         print(str(ex))
         return (False,
                 "A server error occurred. Please contact " +
@@ -292,7 +296,7 @@ def main():
         parser.add_argument(dest="port", metavar="port",help="the port at which the server is listening",
                             type=int)
         args = parser.parse_args()
-    except:
+    except Exception as ex:
         print(ex, file=sys.stderr)
         sys.exit(2)
 
