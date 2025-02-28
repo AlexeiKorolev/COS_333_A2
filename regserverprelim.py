@@ -1,13 +1,10 @@
 import os
 import sys
 import socket
-import time
 import json
 import argparse
 import sqlite3 as sql
 import contextlib
-import textwrap
-import sys
 
 parser = argparse.ArgumentParser()
 
@@ -21,28 +18,22 @@ def return_overviews_query(department='%', course_number='%',
         department = '%'
     else:
         pass
-        department = department.replace('_', r'\_') #Replace underscores
-        department = department.replace('%', r'\%') #Replace %'s
 
     if course_number == '':
         course_number = '%'
     else:
         pass
-        course_number = course_number.replace('_', r'\_')
-        course_number = course_number.replace('%', r'\%')
 
     if distribution_area == '':
         distribution_area = '%' #To allow SQL to ignore
     else:
         pass
-        distribution_area = distribution_area.replace('_', r'\_')
-        distribution_area = distribution_area.replace('%', r'\%')
+
     if class_title == '':
         class_title = '%' #To allow SQL to ignore
     else:
         pass
-        class_title = class_title.replace('_', r'\_')
-        class_title = class_title.replace('%', r'\%')
+
 
     try:
         with sql.connect(DATABASE_URL,
@@ -64,19 +55,19 @@ def return_overviews_query(department='%', course_number='%',
                                         '%' + class_title + '%']) 
                 #Prevent SQL injections
                 table = cursor.fetchall() # fetch query results
-                order_of_keys = ['classid', 'dept', 'coursenum', 
+                order_of_keys = ['classid', 'dept', 'coursenum',
                                  'area', 'title']
 
                 print("creating dictionized table")
 
-                # Converts each row in the table to a key: value dictionary
-                dictionized_table = [{key: value for key, value in 
-                                      zip(order_of_keys, row)} 
+                # Converts each row in the
+                # table to a key: value dictionary
+                dictionized_table = [dict(zip(order_of_keys, row))
                                       for row in table]
 
 
-                print(f"Returning a table with 
-                      {len(dictionized_table)} elements")
+                print("Returning a table with"
+                      + f"{len(dictionized_table)} elements")
 
                 return True, dictionized_table
     except Exception as ex:
@@ -99,14 +90,15 @@ def get_class_info(classid):
 
                 # Ensure there was a response
                 if len(table) == 0:
-                    return False, "no class with " + f"classid 
-                    {classid} exists"
+                    return (False, "no class with "
+                + f"classid {classid} exists")
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
         print(str(ex))
-        return False, f"A server error occurred. Please contact 
-            the system administrator."
+        return (False,
+                "A server error occurred. Please contact " +
+                "the system administrator.")
 
 
 def get_course_info(classid):
@@ -125,8 +117,8 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "no class with " + f"classid
-                      {classid} exists"
+                    return (False, "no class with "
+                + f"classid {classid} exists")
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
@@ -138,8 +130,8 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "no class with " + f"classid 
-                        {classid} exists"
+                    return (False, "no class with "
+                + f"classid {classid} exists")
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs
@@ -197,11 +189,11 @@ def handle_client(sock):
         given_args = actual_call[1]
 
         for arg, val in given_args.items():
-            args[arg] = val 
-        
-        payload =  return_overviews_query(department=args["dept"], 
-                            course_number=args["coursenum"], 
-                            distribution_area=args["area"], 
+            args[arg] = val
+
+        payload =  return_overviews_query(department=args["dept"],
+                            course_number=args["coursenum"],
+                            distribution_area=args["area"],
                             class_title=args["title"])
         flo = sock.makefile(mode="w", encoding="utf-8")
         # Potentially use inflo/outflo here
@@ -212,7 +204,7 @@ def handle_client(sock):
 
     elif actual_call[0] == 'get_details':
         print(actual_call, type(actual_call[1]))
-        class_id = int(actual_call[1]) 
+        class_id = int(actual_call[1])
         print("got past classid")
         classinfo = get_class_info(class_id)
 
@@ -230,9 +222,9 @@ def handle_client(sock):
 
         # CHANGE THIS LATER
         print(f"infosets here: {infosets[0]}")
-        payload = [True, details_format(classinfo[1], 
-                                        infosets[1], 
-                                        infosets[2], 
+        payload = [True, details_format(classinfo[1],
+                                        infosets[1],
+                                        infosets[2],
                                         infosets[3])]
 
         print(f"payload: {payload}")
@@ -253,7 +245,7 @@ def main():
         server_sock = socket.socket()
         print('Opened server socket')
         if os.name != 'nt':
-            server_sock.setsockopt(socket.SOL_SOCKET, 
+            server_sock.setsockopt(socket.SOL_SOCKET,
                                    socket.SO_REUSEADDR, 1)
         server_sock.bind(('', port))
         print('Bound server socket to port')
@@ -266,9 +258,9 @@ def main():
                 with sock:
                     print('Accepted connection')
                     print('Opened socket')
-                    print('Server IP addr and port:', 
+                    print('Server IP addr and port:',
                           sock.getsockname())
-                    print('Client IP addr and port:', 
+                    print('Client IP addr and port:',
                           client_addr)
                     handle_client(sock)
             except Exception as ex:
