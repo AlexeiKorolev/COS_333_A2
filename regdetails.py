@@ -8,7 +8,10 @@ parser = argparse.ArgumentParser(description =
                     "Registrar application: \
                     show details about a class")
 
-# Not formatting responses correctly
+
+"""
+Formats the response from the server for proper printing.
+"""
 def format_reg_response(dict_results):
     output = []
     output.append("-------------")
@@ -56,7 +59,10 @@ def format_reg_response(dict_results):
 
     # Formatting based on requirements
 
-
+"""
+Starts the client, which sends a request to the server based on the given
+arguments and then prints the results.
+"""
 def main():
     # Set up help options
 
