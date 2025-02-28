@@ -105,7 +105,7 @@ def main():
                 print(f"{sys.argv[0]}: {result_text[1]}")
                 sys.exit(1)
     except Exception as ex:
-        print(ex, file=sys.stderr)
+        print(f"{sys.argv[0]}: {ex}", file=sys.stderr)
         sys.exit(1)
     finally:
         sock.close()

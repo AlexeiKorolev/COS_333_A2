@@ -323,7 +323,7 @@ def main():
                 print(ex, file=sys.stderr)
 
     except Exception as ex:
-        print(ex, file=sys.stderr)
+        print(f"{sys.argv[0]}: {ex}", file=sys.stderr)
         sys.exit(1)
 
 #-----------------------------------------------------------------------
