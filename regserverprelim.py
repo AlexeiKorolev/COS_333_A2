@@ -64,14 +64,19 @@ def return_overviews_query(department='%', course_number='%',
                                         '%' + class_title + '%']) 
                 #Prevent SQL injections
                 table = cursor.fetchall() # fetch query results
-                order_of_keys = ['classid', 'dept', 'coursenum', 'area', 'title']
+                order_of_keys = ['classid', 'dept', 'coursenum', 
+                                 'area', 'title']
 
                 print("creating dictionized table")
 
                 # Converts each row in the table to a key: value dictionary
-                dictionized_table = [{key: value for key, value in zip(order_of_keys, row)} for row in table]
+                dictionized_table = [{key: value for key, value in 
+                                      zip(order_of_keys, row)} 
+                                      for row in table]
 
-                print(f"Returning a table with {len(dictionized_table)} elements")
+
+                print(f"Returning a table with 
+                      {len(dictionized_table)} elements")
 
                 return True, dictionized_table
     except Exception as ex:
@@ -94,12 +99,14 @@ def get_class_info(classid):
 
                 # Ensure there was a response
                 if len(table) == 0:
-                    return False, "no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid 
+                    {classid} exists"
                 return True, table[0]
         return False, "Error: database could not be opened."
     except Exception as ex:
         print(str(ex))
-        return False, f"A server error occurred. Please contact the system administrator."
+        return False, f"A server error occurred. Please contact 
+            the system administrator."
 
 
 def get_course_info(classid):
@@ -118,7 +125,8 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(course_info) == 0:
-                    return False, "no class with " +f"classid {classid} exists"
+                    return False, "no class with " + f"classid
+                      {classid} exists"
 
                 # Get all info from crosslistings on courseid
                 query = """SELECT dept, coursenum FROM crosslistings c
@@ -130,7 +138,8 @@ def get_course_info(classid):
 
                 # Ensure there was a response
                 if len(crosslistings_info) == 0:
-                    return False, "no class with " + f"classid {classid} exists"
+                    return False, "no class with " + f"classid 
+                        {classid} exists"
 
                 # Merge coursesprofs and profs, and get relevant names
                 query = """SELECT profname FROM coursesprofs, profs
@@ -145,7 +154,6 @@ def get_course_info(classid):
     except Exception as ex:
         return False, f"{sys.argv[0]}: {ex}"
 
-# ['classid', 'courseid', 'days', 'starttime', 'endtime', 'bldg', 'roomnum', 'deptcoursenums': {'dept': ... , 'coursenum': ...}, 'area', 'title', 'descrip', 'prereqs', 'profnames': [...]]
 
 # Formats the isolated responses into a data dictionary
 def details_format(class_info, course_info, crosslistings_info, res4):
@@ -192,9 +200,9 @@ def handle_client(sock):
             args[arg] = val 
         
         payload =  return_overviews_query(department=args["dept"], 
-                                           course_number=args["coursenum"], 
-                                           distribution_area=args["area"], 
-                                           class_title=args["title"])
+                            course_number=args["coursenum"], 
+                            distribution_area=args["area"], 
+                            class_title=args["title"])
         flo = sock.makefile(mode="w", encoding="utf-8")
         # Potentially use inflo/outflo here
         flo.write(json.dumps(payload) + "\n")
@@ -204,7 +212,7 @@ def handle_client(sock):
 
     elif actual_call[0] == 'get_details':
         print(actual_call, type(actual_call[1]))
-        class_id = int(actual_call[1]) # the second argument is supposed to the class id
+        class_id = int(actual_call[1]) 
         print("got past classid")
         classinfo = get_class_info(class_id)
 
@@ -213,10 +221,7 @@ def handle_client(sock):
             flo.write(json.dumps(classinfo) + "\n")
             flo.flush()
 
-        # Return just the course number, which is [True, (coursenum, ....)].
         infosets = get_course_info(classinfo[1][0])
-
-
 
         if not infosets[0]:
             flo = sock.makefile(mode="w", encoding="utf-8")
@@ -225,7 +230,10 @@ def handle_client(sock):
 
         # CHANGE THIS LATER
         print(f"infosets here: {infosets[0]}")
-        payload = [True, details_format(classinfo[1], infosets[1], infosets[2], infosets[3])]
+        payload = [True, details_format(classinfo[1], 
+                                        infosets[1], 
+                                        infosets[2], 
+                                        infosets[3])]
 
         print(f"payload: {payload}")
 
@@ -245,7 +253,8 @@ def main():
         server_sock = socket.socket()
         print('Opened server socket')
         if os.name != 'nt':
-            server_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            server_sock.setsockopt(socket.SOL_SOCKET, 
+                                   socket.SO_REUSEADDR, 1)
         server_sock.bind(('', port))
         print('Bound server socket to port')
         server_sock.listen()
@@ -257,8 +266,10 @@ def main():
                 with sock:
                     print('Accepted connection')
                     print('Opened socket')
-                    print('Server IP addr and port:', sock.getsockname())
-                    print('Client IP addr and port:', client_addr)
+                    print('Server IP addr and port:', 
+                          sock.getsockname())
+                    print('Client IP addr and port:', 
+                          client_addr)
                     handle_client(sock)
             except Exception as ex:
                 print(ex, file=sys.stderr)
